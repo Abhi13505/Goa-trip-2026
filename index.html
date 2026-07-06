@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Goa '26 - The Ultimate Road Trip</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #fcfaf5;
+      --text-dark: #2d2a26;
+      --accent-orange: #f26d52;
+      --card-bg: #ffffff;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 { font-family: var(--font-serif); }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 10%;
+      color: white;
+      overflow: hidden;
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: -1;
+    }
+
+    .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; line-height: 1.1; }
+    .hero p { max-width: 600px; font-size: 1.2rem; margin-bottom: 2rem; }
+    
+    .badges { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .badge {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(5px);
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    .btn {
+      display: inline-block;
+      background-color: var(--accent-orange);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s ease;
+      align-self: flex-start;
+    }
+    .btn:hover { opacity: 0.9; }
+
+    /* Highlights Section */
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      padding: 4rem 10%;
+      margin-top: -80px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .highlight-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 200px;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem;
+      color: white;
+    }
+
+    .highlight-card video {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+    
+    .highlight-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
+      z-index: -1;
+    }
+
+    .highlight-card h3 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+    .highlight-card p { font-size: 0.9rem; opacity: 0.9; }
+
+    /* Itinerary Container */
+    .container { padding: 4rem 10%; }
+    .section-header { margin-bottom: 3rem; }
+    .section-header h2 { font-size: 3rem; margin-bottom: 0.5rem; }
+    .section-header p { color: #666; font-size: 1.1rem; }
+
+    .itinerary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+
+    .day-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    .day-badge {
+      display: inline-block;
+      background: #fcf0ea;
+      color: var(--accent-orange);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    
+    .day-card h3 { font-size: 1.8rem; margin-bottom: 2rem; }
+
+    .timeline-item {
+      display: flex;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+    .timeline-icon {
+      background: #fdf5f3;
+      color: var(--accent-orange);
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      font-weight: bold;
+    }
+    .timeline-content h4 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
+    .timeline-content p { font-size: 0.9rem; color: #666; }
+
+    /* Motion Videos */
+    .motion-section { margin-bottom: 5rem; }
+    .motion-section h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    .video-wrapper {
+      width: 100%;
+      height: 400px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #e9e5dc;
+    }
+    .video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Tips Section */
+    .tips-section { background: #f7eedf; padding: 4rem 10%; text-align: center; }
+    .tips-section h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .tips-section > p { margin-bottom: 3rem; color: #666; }
+    
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .tip-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      text-align: left;
+    }
+    .tip-card h4 { color: var(--accent-orange); font-family: var(--font-sans); margin-bottom: 0.5rem; }
+    .tip-card p { font-size: 0.9rem; color: #555; }
+
+    /* Footer */
+    footer {
+      background: #2d2a26;
+      color: white;
+      text-align: center;
+      padding: 3rem 10%;
+    }
+    footer h3 { margin-bottom: 0.5rem; }
+    footer p { color: #aaa; font-size: 0.9rem; }
+    
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 3rem; }
+      .highlights { margin-top: 2rem; padding: 2rem 5%; }
+      .container, .tips-section { padding: 2rem 5%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="https://assets.mixkit.co/videos/preview/mixkit-beautiful-sunset-on-the-beach-4235-large.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="badges">
+      <div class="badge">5 Days<br><small>Sep 5 - 9, 2026</small></div>
+      <div class="badge">North + South<br><small>Two coasts, one trip</small></div>
+      <div class="badge">The Crew<br><small>Boys' trip meets zen</small></div>
+    </div>
+    <h1>Five days. Two coasts.<br>One legendary escape.</h1>
+    <p>Beaches, history, flea markets, and after-dark parties in the North. Serene crescent sands and hidden gems down South. Here's our full game plan for Goa 2026.</p>
+    <a href="#itinerary" class="btn">See the day-by-day plan</a>
+  </header>
+
+  <section class="highlights">
+    <div class="highlight-card">
+      <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-at-a-music-festival-4258-large.mp4" type="video/mp4"></video>
+      <div class="highlight-overlay"></div>
+      <div>
+        <h3>Party & Adventure</h3>
+        <p>Baga, Anjuna, Vagator – intense energy and dancing all night.</p>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beautiful-beach-and-ocean-waves-4217-large.mp4" type="video/mp4"></video>
+      <div class="highlight-overlay"></div>
+      <div>
+        <h3>Calm & Hidden Gems</h3>
+        <p>Palolem, Cola, Agonda – serene sands and quiet golden sunsets.</p>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-ruins-of-an-ancient-castle-on-a-cliff-4299-large.mp4" type="video/mp4"></video>
+      <div class="highlight-overlay"></div>
+      <div>
+        <h3>Forts & Views</h3>
+        <p>Chapora and Cabo de Rama – cliffside views over the Arabian Sea.</p>
+      </div>
+    </div>
+  </section>
+
+  <main class="container" id="itinerary">
+    <div class="section-header">
+      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 1 - 2</small>
+      <h2>North Goa</h2>
+      <p>High-energy, buzzing beaches, bohemian markets, and legendary nightlife.</p>
+    </div>
+
+    <div class="itinerary-grid">
+      <div class="day-card">
+        <div class="day-badge">DAY 1 - Fri, Sep 5th</div>
+        <h3>Arrival & First Sunset</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">1</div>
+          <div class="timeline-content">
+            <h4>Land & Check-in</h4>
+            <p>Touch down, drop the bags at the North Goa base, and grab the scooters.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">2</div>
+          <div class="timeline-content">
+            <h4>Calangute & Candolim</h4>
+            <p>Ease into the trip with a lazy afternoon on Goa's most famous stretch of sand.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">3</div>
+          <div class="timeline-content">
+            <h4>Welcome Feast</h4>
+            <p>Fresh seafood and cold drinks at a beachfront shack to kick things off.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">4</div>
+          <div class="timeline-content">
+            <h4>First Night Out</h4>
+            <p>Scout the Baga/Calangute strip and set the tone for the weekend.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">DAY 2 - Sat, Sep 6th</div>
+        <h3>Beaches, Markets & Party</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">1</div>
+          <div class="timeline-content">
+            <h4>Morning at Baga Beach</h4>
+            <p>Water sports — jet skiing and parasailing — or just chill on the sand.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">2</div>
+          <div class="timeline-content">
+            <h4>Anjuna Flea Market</h4>
+            <p>Explore unique souvenirs, clothes, and local crafts amid Anjuna's bohemian vibe.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">3</div>
+          <div class="timeline-content">
+            <h4>Sunset at Vagator</h4>
+            <p>Soak in the iconic views from the cliffside shacks above the beach.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">4</div>
+          <div class="timeline-content">
+            <h4>Night in Anjuna / Vagator</h4>
+            <p>Dive into the vibrant nightlife famous for beach parties and trance music.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-card" style="margin-bottom: 3rem;">
+      <div class="day-badge">DAY 3 - Sun, Sep 7th</div>
+      <h3>Forts, Transition & Serenity</h3>
+      
+      <div class="timeline-item">
+        <div class="timeline-icon">1</div>
+        <div class="timeline-content">
+          <h4>Chapora Fort (before checkout)</h4>
+          <p>Climb up for panoramic views of Vagator Beach and the coastline.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-icon">2</div>
+        <div class="timeline-content">
+          <h4>10:00 AM - Checkout & Drive South</h4>
+          <p>Leave North Goa and travel down to the calmer South, arriving around noon.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-icon">3</div>
+        <div class="timeline-content">
+          <h4>Afternoon at Palolem</h4>
+          <p>Check in and unwind on this peaceful crescent-shaped beach with calm waters.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-icon">4</div>
+        <div class="timeline-content">
+          <h4>Seafood Dinner on Palolem</h4>
+          <p>Fresh catch at a beach shack, then a quiet drink and a stroll along the shore.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-section">
+      <h3>North Goa in motion</h3>
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-friends-driving-a-scooter-in-summer-4113-large.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+
+    <hr style="border: 0; height: 1px; background: #ddd; margin: 4rem 0;">
+
+    <div class="section-header">
+      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 3 - 5</small>
+      <h2>South Goa</h2>
+      <p>Serene crescent bays, sweetwater lagoons, ancient forts, and pristine sunsets.</p>
+    </div>
+
+    <div class="itinerary-grid">
+      <div class="day-card">
+        <div class="day-badge">DAY 4 - Mon, Sep 8th</div>
+        <h3>Hidden Gems & Nature</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">1</div>
+          <div class="timeline-content">
+            <h4>Cola (Khola) Beach</h4>
+            <p>Discover its unique sweetwater lagoon — perfect for a refreshing morning dip.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">2</div>
+          <div class="timeline-content">
+            <h4>Cabo de Rama Fort</h4>
+            <p>Explore ancient fort ruins with breathtaking views of the Arabian Sea.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">3</div>
+          <div class="timeline-content">
+            <h4>Sunset at Agonda Beach</h4>
+            <p>One of Goa's most pristine, quiet beaches for a serene golden-hour moment.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">4</div>
+          <div class="timeline-content">
+            <h4>Dinner in Agonda</h4>
+            <p>Wind down with a peaceful dinner at a local restaurant.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-badge">DAY 5 - Tue, Sep 9th</div>
+        <h3>Last Moments & Departure</h3>
+        
+        <div class="timeline-item">
+          <div class="timeline-icon">1</div>
+          <div class="timeline-content">
+            <h4>Final Beach Breakfast</h4>
+            <p>One last breakfast by the sea, or revisit the crew's favorite spot.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">2</div>
+          <div class="timeline-content">
+            <h4>Depart Goa</h4>
+            <p>Head out carrying unforgettable memories from an epic five days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="motion-section">
+      <h3>South Goa in motion</h3>
+      <div class="video-wrapper">
+        <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-calm-sea-waves-crashing-on-the-sandy-beach-at-sunset-4231-large.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+  </main>
+
+  <section class="tips-section">
+    <h2>Tips for the Crew</h2>
+    <p>A few things to keep the trip smooth, safe, and full of good vibes.</p>
+    
+    <div class="tips-grid">
+      <div class="tip-card">
+        <h4>Transportation</h4>
+        <p>Rent scooters or bikes for easy navigation, especially in North Goa. Taxis are also available.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Stay Hydrated</h4>
+        <p>Goa gets hot and humid — drink plenty of water and tender coconut water.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Sun Protection</h4>
+        <p>Carry sunscreen, hats, and sunglasses for those long beach days.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Carry Cash</h4>
+        <p>Cards are widely accepted, but keep cash handy for shacks and small purchases.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Safety</h4>
+        <p>Keep an eye on your belongings, especially on crowded beaches and in markets.</p>
+      </div>
+      <div class="tip-card">
+        <h4>Embrace the Vibe</h4>
+        <p>Goa is all about relaxation and fun. Go with the flow and enjoy every moment.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <h3>Goa Boys' Trip - 2026</h3>
+    <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
+  </footer>
+
+</body>
+</html>
