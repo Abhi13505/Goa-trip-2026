@@ -26,6 +26,14 @@
 
     h1, h2, h3, h4 { font-family: var(--font-serif); }
 
+    /* Universal Media Background for GIFs */
+    .media-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
     /* Hero Section */
     .hero {
       position: relative;
@@ -36,13 +44,6 @@
       padding: 0 10%;
       color: white;
       overflow: hidden;
-    }
-
-    .hero-video {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -2;
     }
 
     .hero-overlay {
@@ -98,13 +99,6 @@
       align-items: flex-end;
       padding: 1.5rem;
       color: white;
-    }
-
-    .highlight-card video {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -2;
     }
     
     .highlight-overlay {
@@ -171,7 +165,7 @@
     .timeline-content h4 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
     .timeline-content p { font-size: 0.9rem; color: #666; }
 
-    /* Motion Videos */
+    /* Motion GIF sections */
     .motion-section { margin-bottom: 5rem; }
     .motion-section h3 { font-size: 1.5rem; margin-bottom: 1rem; }
     .video-wrapper {
@@ -180,8 +174,9 @@
       border-radius: 20px;
       overflow: hidden;
       background: #e9e5dc;
+      position: relative;
     }
-    .video-wrapper video { width: 100%; height: 100%; object-fit: cover; }
+    .video-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
     /* Tips Section */
     .tips-section { background: #f7eedf; padding: 4rem 10%; text-align: center; }
@@ -221,10 +216,9 @@
 </head>
 <body>
 
+  <!-- Hero Section -->
   <header class="hero">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="https://assets.mixkit.co/videos/preview/mixkit-beautiful-sunset-on-the-beach-4235-large.mp4" type="video/mp4">
-    </video>
+    <img src="https://media.giphy.com/media/3o7TKrEzvLbgqjSYb6/giphy.gif" class="media-bg" alt="Goa Beach Sunset">
     <div class="hero-overlay"></div>
     <div class="badges">
       <div class="badge">5 Days<br><small>Sep 5 - 9, 2026</small></div>
@@ -236,9 +230,10 @@
     <a href="#itinerary" class="btn">See the day-by-day plan</a>
   </header>
 
+  <!-- Highlights -->
   <section class="highlights">
     <div class="highlight-card">
-      <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-crowd-at-a-music-festival-4258-large.mp4" type="video/mp4"></video>
+      <img src="https://media.giphy.com/media/l2JHRhAtnJSDNJ2py/giphy.gif" class="media-bg" alt="Party">
       <div class="highlight-overlay"></div>
       <div>
         <h3>Party & Adventure</h3>
@@ -246,7 +241,7 @@
       </div>
     </div>
     <div class="highlight-card">
-      <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beautiful-beach-and-ocean-waves-4217-large.mp4" type="video/mp4"></video>
+      <img src="https://media.giphy.com/media/871qwDxfSemEE/giphy.gif" class="media-bg" alt="Calm Beach">
       <div class="highlight-overlay"></div>
       <div>
         <h3>Calm & Hidden Gems</h3>
@@ -254,7 +249,7 @@
       </div>
     </div>
     <div class="highlight-card">
-      <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-ruins-of-an-ancient-castle-on-a-cliff-4299-large.mp4" type="video/mp4"></video>
+      <img src="https://media.giphy.com/media/3o7aCVX8B56K2yCIBW/giphy.gif" class="media-bg" alt="Forts and Ocean">
       <div class="highlight-overlay"></div>
       <div>
         <h3>Forts & Views</h3>
@@ -263,6 +258,7 @@
     </div>
   </section>
 
+  <!-- North Goa Itinerary -->
   <main class="container" id="itinerary">
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 1 - 2</small>
@@ -271,6 +267,7 @@
     </div>
 
     <div class="itinerary-grid">
+      <!-- Day 1 -->
       <div class="day-card">
         <div class="day-badge">DAY 1 - Fri, Sep 5th</div>
         <h3>Arrival & First Sunset</h3>
@@ -305,6 +302,7 @@
         </div>
       </div>
 
+      <!-- Day 2 -->
       <div class="day-card">
         <div class="day-badge">DAY 2 - Sat, Sep 6th</div>
         <h3>Beaches, Markets & Party</h3>
@@ -340,6 +338,7 @@
       </div>
     </div>
 
+    <!-- Transition Day (Day 3) -->
     <div class="day-card" style="margin-bottom: 3rem;">
       <div class="day-badge">DAY 3 - Sun, Sep 7th</div>
       <h3>Forts, Transition & Serenity</h3>
@@ -374,15 +373,17 @@
       </div>
     </div>
 
+    <!-- North Goa Motion GIF -->
     <div class="motion-section">
       <h3>North Goa in motion</h3>
       <div class="video-wrapper">
-        <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-friends-driving-a-scooter-in-summer-4113-large.mp4" type="video/mp4"></video>
+        <img src="https://media.giphy.com/media/V83XG04JqAhuU/giphy.gif" alt="Scooter vibes in North Goa">
       </div>
     </div>
 
     <hr style="border: 0; height: 1px; background: #ddd; margin: 4rem 0;">
 
+    <!-- South Goa Itinerary -->
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 3 - 5</small>
       <h2>South Goa</h2>
@@ -390,6 +391,7 @@
     </div>
 
     <div class="itinerary-grid">
+      <!-- Day 4 -->
       <div class="day-card">
         <div class="day-badge">DAY 4 - Mon, Sep 8th</div>
         <h3>Hidden Gems & Nature</h3>
@@ -424,6 +426,7 @@
         </div>
       </div>
 
+      <!-- Day 5 -->
       <div class="day-card">
         <div class="day-badge">DAY 5 - Tue, Sep 9th</div>
         <h3>Last Moments & Departure</h3>
@@ -445,14 +448,16 @@
       </div>
     </div>
 
+    <!-- South Goa Motion GIF -->
     <div class="motion-section">
       <h3>South Goa in motion</h3>
       <div class="video-wrapper">
-        <video autoplay muted loop playsinline><source src="https://assets.mixkit.co/videos/preview/mixkit-calm-sea-waves-crashing-on-the-sandy-beach-at-sunset-4231-large.mp4" type="video/mp4"></video>
+        <img src="https://media.giphy.com/media/u0v3z2gQLZwRAWzKSj/giphy.gif" alt="Serene South Goa waves">
       </div>
     </div>
   </main>
 
+  <!-- Tips Section -->
   <section class="tips-section">
     <h2>Tips for the Crew</h2>
     <p>A few things to keep the trip smooth, safe, and full of good vibes.</p>
@@ -485,6 +490,7 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <h3>Goa Boys' Trip - 2026</h3>
     <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
