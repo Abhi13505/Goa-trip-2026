@@ -7,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-color: #fdfaf4;
       --text-dark: #2d2a26;
       --accent-orange: #f26d52;
       --card-bg: rgba(255, 255, 255, 0.85);
@@ -19,11 +18,8 @@
     
     body {
       font-family: var(--font-sans);
-      background-color: var(--bg-color);
-      /* Minimal Goa Vibes: Subtle Sunset Coral & Ocean Blue Gradient */
-      background-image: 
-        radial-gradient(at 0% 0%, rgba(255, 127, 80, 0.08) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(0, 168, 204, 0.08) 0px, transparent 50%);
+      /* Minimal Goa Vibes: Distinct Sand, Sunset Coral, and Ocean Blue */
+      background: linear-gradient(135deg, #fdf8eb 0%, #fce1d5 50%, #e2f3f7 100%);
       background-attachment: fixed;
       color: var(--text-dark);
       line-height: 1.6;
@@ -134,8 +130,8 @@
       backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 1px solid rgba(255,255,255,0.7);
     }
 
     .day-badge {
@@ -190,7 +186,12 @@
     }
 
     /* Tips Section */
-    .tips-section { background: rgba(247, 238, 223, 0.7); padding: 4rem 10%; text-align: center; }
+    .tips-section { 
+      background: rgba(255, 255, 255, 0.4); 
+      backdrop-filter: blur(5px);
+      padding: 4rem 10%; 
+      text-align: center; 
+    }
     .tips-section h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
     .tips-section > p { margin-bottom: 3rem; color: #666; }
     
@@ -204,7 +205,7 @@
       padding: 1.5rem;
       border-radius: 12px;
       text-align: left;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     }
     .tip-card h4 { color: var(--accent-orange); font-family: var(--font-sans); margin-bottom: 0.5rem; }
     .tip-card p { font-size: 0.9rem; color: #555; }
@@ -259,13 +260,11 @@
 
     #beerBtn {
       bottom: 25px;
-      /* Starts animation instantly */
       animation-delay: 0s; 
     }
 
     #rouletteBtn {
       bottom: 100px;
-      /* Offsets the shake so they take turns shaking */
       animation-delay: 2s; 
     }
     
@@ -320,6 +319,7 @@
 </head>
 <body>
 
+  <!-- Hero Section -->
   <header class="hero">
     <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
     <div class="hero-overlay"></div>
@@ -333,6 +333,7 @@
     <a href="#itinerary" class="btn">See the day-by-day plan</a>
   </header>
 
+  <!-- Highlights -->
   <section class="highlights">
     <div class="highlight-card">
       <img src="baga.png" class="media-bg" alt="Baga Beach">
@@ -360,6 +361,7 @@
     </div>
   </section>
 
+  <!-- North Goa Itinerary -->
   <main class="container" id="itinerary">
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 1 - 2</small>
@@ -368,6 +370,7 @@
     </div>
 
     <div class="itinerary-grid">
+      <!-- Day 1 -->
       <div class="day-card">
         <div class="day-badge">DAY 1 - Fri, Sep 5th</div>
         <h3>Arrival & First Sunset</h3>
@@ -402,6 +405,7 @@
         </div>
       </div>
 
+      <!-- Day 2 -->
       <div class="day-card">
         <div class="day-badge">DAY 2 - Sat, Sep 6th</div>
         <h3>Beaches, Markets & Party</h3>
@@ -437,6 +441,7 @@
       </div>
     </div>
 
+    <!-- Transition Day (Day 3) -->
     <div class="day-card" style="margin-bottom: 3rem;">
       <div class="day-badge">DAY 3 - Sun, Sep 7th</div>
       <h3>Forts, Transition & Serenity</h3>
@@ -471,6 +476,7 @@
       </div>
     </div>
 
+    <!-- North Goa Motion PORTRAIT VIDEO -->
     <div class="motion-section">
       <h3>North Goa in motion</h3>
       <div class="video-wrapper">
@@ -482,6 +488,7 @@
 
     <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.1); margin: 4rem 0;">
 
+    <!-- South Goa Itinerary -->
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 3 - 5</small>
       <h2>South Goa</h2>
@@ -489,6 +496,7 @@
     </div>
 
     <div class="itinerary-grid">
+      <!-- Day 4 -->
       <div class="day-card">
         <div class="day-badge">DAY 4 - Mon, Sep 8th</div>
         <h3>Hidden Gems & Nature</h3>
@@ -523,6 +531,7 @@
         </div>
       </div>
 
+      <!-- Day 5 -->
       <div class="day-card">
         <div class="day-badge">DAY 5 - Tue, Sep 9th</div>
         <h3>Last Moments & Departure</h3>
@@ -544,6 +553,7 @@
       </div>
     </div>
 
+    <!-- South Goa Motion PORTRAIT VIDEO -->
     <div class="motion-section">
       <h3>South Goa in motion</h3>
       <div class="video-wrapper">
@@ -554,6 +564,7 @@
     </div>
   </main>
 
+  <!-- Tips Section -->
   <section class="tips-section">
     <h2>Tips for the Crew</h2>
     <p>A few things to keep the trip smooth, safe, and full of good vibes.</p>
@@ -586,17 +597,21 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <h3>Goa Boys' Trip - 2026</h3>
     <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
   </footer>
 
+  <!-- Floating Easter Egg Buttons -->
   <div class="easter-btn" id="rouletteBtn">🎰</div>
   <div class="easter-btn" id="beerBtn">🍺</div>
 
+  <!-- Fullscreen Video Overlay -->
   <div class="video-modal" id="videoModal">
     <div class="close-hint">Tap anywhere to close</div>
     
+    <!-- Both videos are stored here, and only the clicked one is shown -->
     <video id="beerVideo" loop playsinline>
       <source src="Video 3.mov">
     </video>
@@ -606,6 +621,7 @@
     </video>
   </div>
 
+  <!-- Interactive Script -->
   <script>
     const beerBtn = document.getElementById('beerBtn');
     const rouletteBtn = document.getElementById('rouletteBtn');
