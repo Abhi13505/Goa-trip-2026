@@ -215,32 +215,58 @@
       color: white;
       text-align: center;
       padding: 3rem 10%;
-      padding-bottom: 6rem;
+      padding-bottom: 8rem; /* Extra padding so buttons don't overlap footer text */
     }
     footer h3 { margin-bottom: 0.5rem; }
     footer p { color: #aaa; font-size: 0.9rem; }
     
-    /* Easter Egg Beer Button */
-    .beer-btn {
+    /* -------------------------------------
+       Easter Egg Floating Buttons
+    -------------------------------------- */
+    
+    /* The keyframe for the subtle shake animation */
+    @keyframes subtle-shake {
+      0%, 85%, 100% { transform: rotate(0deg); }
+      88% { transform: rotate(-10deg); }
+      91% { transform: rotate(10deg); }
+      94% { transform: rotate(-10deg); }
+      97% { transform: rotate(5deg); }
+    }
+
+    .easter-btn {
       position: fixed;
-      bottom: 25px;
       right: 25px;
       background: var(--accent-orange);
-      width: 65px;
-      height: 65px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
+      font-size: 30px;
       cursor: pointer;
       box-shadow: 0 8px 25px rgba(242, 109, 82, 0.4);
       z-index: 100;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
       border: 3px solid white;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      animation: subtle-shake 4s infinite ease-in-out;
     }
-    .beer-btn:active {
-      transform: scale(0.95);
+    
+    .easter-btn:active {
+      transform: scale(0.90) !important; /* Forces it to shrink when tapped */
+      animation: none;
+    }
+
+    #beerBtn {
+      bottom: 25px;
+      /* Starts animation instantly */
+      animation-delay: 0s; 
+    }
+
+    #rouletteBtn {
+      bottom: 100px;
+      /* Offsets the shake so they take turns shaking */
+      animation-delay: 2s; 
     }
     
     /* Easter Egg Video Modal */
@@ -268,6 +294,7 @@
       max-width: 400px;
       border-radius: 16px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+      display: none; /* Hidden by default until activated */
     }
     .close-hint {
       position: absolute;
@@ -285,13 +312,14 @@
       .hero h1 { font-size: 3rem; }
       .highlights { margin-top: 2rem; padding: 2rem 5%; }
       .container, .tips-section { padding: 2rem 5%; }
-      .beer-btn { bottom: 20px; right: 20px; width: 60px; height: 60px; font-size: 28px; }
+      .easter-btn { right: 20px; width: 55px; height: 55px; font-size: 26px; }
+      #beerBtn { bottom: 20px; }
+      #rouletteBtn { bottom: 90px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Hero Section -->
   <header class="hero">
     <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
     <div class="hero-overlay"></div>
@@ -305,7 +333,6 @@
     <a href="#itinerary" class="btn">See the day-by-day plan</a>
   </header>
 
-  <!-- Highlights -->
   <section class="highlights">
     <div class="highlight-card">
       <img src="baga.png" class="media-bg" alt="Baga Beach">
@@ -333,7 +360,6 @@
     </div>
   </section>
 
-  <!-- North Goa Itinerary -->
   <main class="container" id="itinerary">
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 1 - 2</small>
@@ -342,7 +368,6 @@
     </div>
 
     <div class="itinerary-grid">
-      <!-- Day 1 -->
       <div class="day-card">
         <div class="day-badge">DAY 1 - Fri, Sep 5th</div>
         <h3>Arrival & First Sunset</h3>
@@ -377,7 +402,6 @@
         </div>
       </div>
 
-      <!-- Day 2 -->
       <div class="day-card">
         <div class="day-badge">DAY 2 - Sat, Sep 6th</div>
         <h3>Beaches, Markets & Party</h3>
@@ -413,7 +437,6 @@
       </div>
     </div>
 
-    <!-- Transition Day (Day 3) -->
     <div class="day-card" style="margin-bottom: 3rem;">
       <div class="day-badge">DAY 3 - Sun, Sep 7th</div>
       <h3>Forts, Transition & Serenity</h3>
@@ -448,7 +471,6 @@
       </div>
     </div>
 
-    <!-- North Goa Motion PORTRAIT VIDEO -->
     <div class="motion-section">
       <h3>North Goa in motion</h3>
       <div class="video-wrapper">
@@ -460,7 +482,6 @@
 
     <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.1); margin: 4rem 0;">
 
-    <!-- South Goa Itinerary -->
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 3 - 5</small>
       <h2>South Goa</h2>
@@ -468,7 +489,6 @@
     </div>
 
     <div class="itinerary-grid">
-      <!-- Day 4 -->
       <div class="day-card">
         <div class="day-badge">DAY 4 - Mon, Sep 8th</div>
         <h3>Hidden Gems & Nature</h3>
@@ -503,7 +523,6 @@
         </div>
       </div>
 
-      <!-- Day 5 -->
       <div class="day-card">
         <div class="day-badge">DAY 5 - Tue, Sep 9th</div>
         <h3>Last Moments & Departure</h3>
@@ -525,7 +544,6 @@
       </div>
     </div>
 
-    <!-- South Goa Motion PORTRAIT VIDEO -->
     <div class="motion-section">
       <h3>South Goa in motion</h3>
       <div class="video-wrapper">
@@ -536,7 +554,6 @@
     </div>
   </main>
 
-  <!-- Tips Section -->
   <section class="tips-section">
     <h2>Tips for the Crew</h2>
     <p>A few things to keep the trip smooth, safe, and full of good vibes.</p>
@@ -569,43 +586,63 @@
     </div>
   </section>
 
-  <!-- Footer -->
   <footer>
     <h3>Goa Boys' Trip - 2026</h3>
     <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
   </footer>
 
-  <!-- Floating Beer Button -->
-  <div class="beer-btn" id="beerBtn">
-    🍺
-  </div>
+  <div class="easter-btn" id="rouletteBtn">🎰</div>
+  <div class="easter-btn" id="beerBtn">🍺</div>
 
-  <!-- Fullscreen Video Overlay -->
   <div class="video-modal" id="videoModal">
     <div class="close-hint">Tap anywhere to close</div>
-    <!-- Added "loop" here so Peter Griffin loops endlessly -->
-    <video id="easterEggVideo" loop playsinline>
+    
+    <video id="beerVideo" loop playsinline>
       <source src="Video 3.mov">
+    </video>
+    
+    <video id="rouletteVideo" loop playsinline>
+      <source src="Video 4.mov">
     </video>
   </div>
 
-  <!-- Interactive Script -->
   <script>
     const beerBtn = document.getElementById('beerBtn');
+    const rouletteBtn = document.getElementById('rouletteBtn');
     const videoModal = document.getElementById('videoModal');
-    const easterEggVideo = document.getElementById('easterEggVideo');
+    
+    const beerVideo = document.getElementById('beerVideo');
+    const rouletteVideo = document.getElementById('rouletteVideo');
+    let activeVideo = null;
 
-    // When the beer button is clicked, show the modal and play the video
+    // Open Beer Video
     beerBtn.addEventListener('click', () => {
+      activeVideo = beerVideo;
+      beerVideo.style.display = 'block';
+      rouletteVideo.style.display = 'none';
+      
       videoModal.classList.add('active');
-      easterEggVideo.currentTime = 0; // Restart video each time
-      easterEggVideo.play();
+      activeVideo.currentTime = 0; // Restart
+      activeVideo.play();
     });
 
-    // When the darkened background is clicked, hide the modal and pause the video
-    videoModal.addEventListener('click', (e) => {
+    // Open Roulette Video
+    rouletteBtn.addEventListener('click', () => {
+      activeVideo = rouletteVideo;
+      rouletteVideo.style.display = 'block';
+      beerVideo.style.display = 'none';
+      
+      videoModal.classList.add('active');
+      activeVideo.currentTime = 0; // Restart
+      activeVideo.play();
+    });
+
+    // Close Modal on Background Click
+    videoModal.addEventListener('click', () => {
       videoModal.classList.remove('active');
-      easterEggVideo.pause();
+      if (activeVideo) {
+        activeVideo.pause();
+      }
     });
   </script>
 
