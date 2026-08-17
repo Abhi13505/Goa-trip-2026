@@ -5,78 +5,79 @@
 <title>Goa '26 - The Ultimate Escape</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-:root{--text-dark:#2d2a26;--accent-orange:#f26d52;--card-bg:rgba(255,255,255,0.4);--font-serif:'Playfair Display',serif;--font-sans:'Inter',sans-serif;}
+:root{--text-dark:#2a2825;--accent-orange:#d96c4e;--card-bg:rgba(255,255,255,0.65);--font-serif:'Playfair Display',serif;--font-sans:'Inter',sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:var(--font-sans);background-color:#f4f0ea;color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
-.orb{position:fixed;border-radius:50%;filter:blur(60px);z-index:-3;animation:float 12s infinite ease-in-out alternate;}
-.orb-1{width:400px;height:400px;background:linear-gradient(to bottom right,#f26d52,#ffb347);top:-10%;left:-10%;}
-.orb-2{width:500px;height:500px;background:linear-gradient(to bottom right,#00a8cc,#005c99);bottom:-15%;right:-10%;animation-delay:-5s;}
-.orb-3{width:300px;height:300px;background:linear-gradient(to bottom right,#ff9a9e,#fecfef);top:40%;left:50%;transform:translateX(-50%);animation-delay:-2s;}
-@keyframes float{0%{transform:translateY(0) scale(1) translateX(0);}100%{transform:translateY(-80px) scale(1.1) translateX(40px);}}
+body{font-family:var(--font-sans);background-color:#F7F5F0;background-image:radial-gradient(rgba(0,0,0,0.04) 1px,transparent 1px);background-size:24px 24px;color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
+.orb{position:fixed;border-radius:50%;filter:blur(80px);z-index:-3;animation:float 15s infinite ease-in-out alternate;opacity:0.6;}
+.orb-1{width:50vw;height:50vw;background:radial-gradient(circle,#ebdccc 0%,transparent 70%);top:-10%;left:-10%;}
+.orb-2{width:60vw;height:60vw;background:radial-gradient(circle,#dce8eb 0%,transparent 70%);bottom:-15%;right:-10%;animation-delay:-5s;}
+.orb-3{width:40vw;height:40vw;background:radial-gradient(circle,#f2e1df 0%,transparent 70%);top:30%;left:40%;transform:translateX(-50%);animation-delay:-2s;}
+@keyframes float{0%{transform:translateY(0) scale(1);}100%{transform:translateY(-40px) scale(1.05);}}
 h1,h2,h3,h4{font-family:var(--font-serif);}
 .media-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;}
 .hero{position:relative;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 10%;color:white;overflow:hidden;}
-.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:-1;}
+.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);z-index:-1;}
 .hero h1{font-size:4.5rem;margin-bottom:1rem;line-height:1.1;transform:translateZ(50px);}
-.hero p{max-width:600px;font-size:1.2rem;margin-bottom:2rem;transform:translateZ(40px);}
+.hero p{max-width:600px;font-size:1.2rem;margin-bottom:2rem;transform:translateZ(40px);font-weight:300;}
 .badges{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;transform:translateZ(30px);}
-.badge{background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);padding:0.75rem 1.5rem;border-radius:50px;font-weight:600;border:1px solid rgba(255,255,255,0.4);}
-.btn{display:inline-block;background-color:var(--accent-orange);color:white;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:opacity 0.3s;align-self:flex-start;transform:translateZ(40px);}
-.btn:hover{opacity:0.9;}
-.tilt-card{transform-style:preserve-3d;background:var(--card-bg);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.6);box-shadow:0 25px 45px rgba(0,0,0,0.1);}
+.badge{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);padding:0.6rem 1.4rem;border-radius:50px;font-weight:600;font-size:0.9rem;border:1px solid rgba(255,255,255,0.3);letter-spacing:0.5px;}
+.btn{display:inline-block;background-color:var(--accent-orange);color:white;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:all 0.3s ease;align-self:flex-start;transform:translateZ(40px);box-shadow:0 10px 20px rgba(217,108,78,0.2);}
+.btn:hover{opacity:0.9;transform:translateZ(40px) translateY(-2px);box-shadow:0 15px 25px rgba(217,108,78,0.3);}
+.tilt-card{transform-style:preserve-3d;background:var(--card-bg);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.8);box-shadow:0 20px 40px rgba(0,0,0,0.04);}
 .tilt-card > *{transform:translateZ(30px);}
 .highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;padding:4rem 10%;margin-top:-80px;position:relative;z-index:2;transform-style:preserve-3d;}
-.highlight-card{position:relative;border-radius:16px;overflow:hidden;height:200px;display:flex;align-items:flex-end;padding:1.5rem;color:white;transform-style:preserve-3d;}
+.highlight-card{position:relative;border-radius:16px;overflow:hidden;height:220px;display:flex;align-items:flex-end;padding:1.5rem;color:white;transform-style:preserve-3d;}
 .highlight-card > div{transform:translateZ(40px);}
-.highlight-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(0,0,0,0.9),rgba(0,0,0,0.1));z-index:-1;transform:translateZ(0);}
+.highlight-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(0,0,0,0.85),rgba(0,0,0,0.1));z-index:-1;transform:translateZ(0);}
 .highlight-card h3{font-size:1.5rem;margin-bottom:0.25rem;}
-.highlight-card p{font-size:0.9rem;opacity:0.9;}
+.highlight-card p{font-size:0.9rem;opacity:0.9;font-family:var(--font-sans);font-weight:300;}
 .container{padding:4rem 10%;position:relative;z-index:2;}
 .section-header{margin-bottom:3rem;}
-.section-header h2{font-size:3rem;margin-bottom:0.5rem;}
-.section-header p{color:#666;font-size:1.1rem;}
-.itinerary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;margin-bottom:4rem;}
-.day-card{border-radius:20px;padding:2.5rem;}
-.day-badge{display:inline-block;background:rgba(255,255,255,0.7);color:var(--accent-orange);padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem;}
-.day-card h3{font-size:1.8rem;margin-bottom:2rem;}
-.timeline-item{display:flex;margin-bottom:2rem;position:relative;}
-.timeline-icon{background:rgba(255,255,255,0.8);color:var(--accent-orange);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:1rem;flex-shrink:0;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
-.timeline-content h4{font-family:var(--font-sans);font-size:1.05rem;font-weight:600;margin-bottom:0.35rem;}
-.timeline-content p{font-size:0.95rem;color:#444;line-height:1.5;}
-.timeline-meta{font-size:0.8rem;color:#777;margin-top:8px;background:rgba(0,0,0,0.03);padding:6px 10px;border-radius:8px;display:inline-block;}
+.section-header h2{font-size:3rem;margin-bottom:0.5rem;color:#1a1918;}
+.section-header p{color:#666;font-size:1.1rem;font-weight:300;}
+.itinerary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2.5rem;margin-bottom:4rem;}
+.day-card{border-radius:24px;padding:3rem;}
+.day-badge{display:inline-block;background:rgba(217,108,78,0.1);color:var(--accent-orange);padding:0.4rem 1.2rem;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem;letter-spacing:0.5px;}
+.day-card h3{font-size:1.8rem;margin-bottom:2.5rem;color:#1a1918;}
+.timeline-item{display:flex;margin-bottom:2.5rem;position:relative;}
+.timeline-icon{background:#fff;color:var(--accent-orange);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:1.2rem;flex-shrink:0;font-weight:bold;box-shadow:0 8px 15px rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.03);}
+.timeline-content h4{font-family:var(--font-sans);font-size:1.05rem;font-weight:600;margin-bottom:0.4rem;color:#222;}
+.timeline-content p{font-size:0.95rem;color:#555;line-height:1.6;font-weight:300;}
+.timeline-meta{font-size:0.8rem;color:#777;margin-top:10px;background:rgba(255,255,255,0.6);padding:6px 12px;border-radius:8px;display:inline-block;border:1px solid rgba(0,0,0,0.03);}
 .timeline-meta a{color:var(--accent-orange);text-decoration:none;font-weight:600;}
 .timeline-meta a:hover{text-decoration:underline;}
-.carousel-container{width:100%;margin-bottom:2rem;transform:translateZ(40px);}
-.carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding-bottom:10px;scrollbar-width:none;-ms-overflow-style:none;}
+.carousel-container{width:100%;margin-bottom:2.5rem;transform:translateZ(40px);}
+.carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding-bottom:15px;scrollbar-width:none;-ms-overflow-style:none;}
 .carousel-track::-webkit-scrollbar{display:none;}
-.carousel-slide{flex:0 0 100%;scroll-snap-align:center;height:350px;object-fit:cover;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.1);}
-.carousel-hint{text-align:center;font-size:0.85rem;color:#666;margin-top:0.5rem;font-weight:600;letter-spacing:0.5px;}
-.motion-section{margin-bottom:5rem;}
-.motion-section h3{font-size:1.5rem;margin-bottom:1.5rem;}
+.carousel-slide{flex:0 0 100%;scroll-snap-align:center;height:380px;object-fit:cover;border-radius:16px;box-shadow:0 15px 35px rgba(0,0,0,0.08);}
+.carousel-hint{text-align:center;font-size:0.8rem;color:#888;margin-top:0.5rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.motion-section{margin-bottom:6rem;}
+.motion-section h3{font-size:1.8rem;margin-bottom:2rem;text-align:center;}
 .video-wrapper{width:100%;display:flex;justify-content:center;}
-.video-wrapper video{width:100%;max-width:350px;height:auto;border-radius:20px;box-shadow:0 25px 45px rgba(0,0,0,0.15);background:#000;}
-.tips-section{background:rgba(255,255,255,0.2);backdrop-filter:blur(15px);padding:4rem 10%;text-align:center;position:relative;z-index:2;}
-.tips-section h2{font-size:2.5rem;margin-bottom:0.5rem;}
-.tips-section > p{margin-bottom:3rem;color:#555;}
-.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
-.tip-card{background:rgba(255,255,255,0.7);padding:1.5rem;border-radius:12px;text-align:left;border:1px solid rgba(255,255,255,0.8);}
-.tip-card h4{color:var(--accent-orange);font-family:var(--font-sans);margin-bottom:0.5rem;}
-.tip-card p{font-size:0.9rem;color:#444;}
-footer{background:rgba(45,42,38,0.95);backdrop-filter:blur(10px);color:white;text-align:center;padding:3rem 10% 8rem;position:relative;z-index:2;}
-footer h3{margin-bottom:0.5rem;}
-footer p{color:#aaa;font-size:0.9rem;}
-.subtle-link{color:#666;text-decoration:none;font-size:0.85rem;font-weight:600;transition:color 0.2s;}
+.video-wrapper video{width:100%;max-width:320px;height:auto;border-radius:24px;box-shadow:0 30px 60px rgba(0,0,0,0.12);background:#000;}
+.tips-section{background:rgba(255,255,255,0.4);backdrop-filter:blur(20px);padding:5rem 10%;text-align:center;position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.8);}
+.tips-section h2{font-size:2.8rem;margin-bottom:1rem;color:#1a1918;}
+.tips-section > p{margin-bottom:4rem;color:#666;font-weight:300;font-size:1.1rem;}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;}
+.tip-card{background:rgba(255,255,255,0.8);padding:2rem;border-radius:16px;text-align:left;border:1px solid rgba(255,255,255,0.9);box-shadow:0 10px 30px rgba(0,0,0,0.03);}
+.tip-card h4{color:var(--accent-orange);font-family:var(--font-sans);margin-bottom:0.75rem;font-size:1.1rem;}
+.tip-card p{font-size:0.95rem;color:#555;font-weight:300;line-height:1.6;}
+footer{background:#1a1918;color:#fff;text-align:center;padding:4rem 10% 8rem;position:relative;z-index:2;}
+footer h3{margin-bottom:1rem;font-size:1.5rem;}
+footer p{color:#888;font-size:0.95rem;font-weight:300;}
+.subtle-link{color:#888;text-decoration:none;font-size:0.85rem;font-weight:600;transition:color 0.2s;text-transform:uppercase;letter-spacing:1px;}
 .subtle-link:hover{color:var(--accent-orange);}
-@keyframes subtle-shake{0%,85%,100%{transform:rotate(0deg);}88%,94%{transform:rotate(-10deg);}91%{transform:rotate(10deg);}97%{transform:rotate(5deg);}}
-.easter-btn{position:fixed;right:25px;background:var(--accent-orange);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;box-shadow:0 8px 25px rgba(242,109,82,0.4);z-index:100;border:3px solid white;transition:transform 0.2s,box-shadow 0.2s;animation:subtle-shake 4s infinite ease-in-out;}
-.easter-btn:active{transform:scale(0.90) !important;animation:none;}
-#beerBtn{bottom:25px;animation-delay:0s;}
-#rouletteBtn{bottom:100px;animation-delay:2s;}
-.video-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.9);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+@keyframes subtle-shake{0%,85%,100%{transform:rotate(0deg);}88%,94%{transform:rotate(-8deg);}91%{transform:rotate(8deg);}97%{transform:rotate(4deg);}}
+.easter-btn{position:fixed;right:30px;background:#fff;color:var(--text-dark);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;box-shadow:0 15px 35px rgba(0,0,0,0.1);z-index:100;border:1px solid rgba(0,0,0,0.05);transition:transform 0.2s,box-shadow 0.2s;animation:subtle-shake 5s infinite ease-in-out;}
+.easter-btn:hover{box-shadow:0 20px 45px rgba(0,0,0,0.15);transform:translateY(-3px);}
+.easter-btn:active{transform:scale(0.92) !important;animation:none;}
+#beerBtn{bottom:30px;animation-delay:0s;}
+#rouletteBtn{bottom:110px;animation-delay:2.5s;}
+.video-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(26,25,24,0.95);backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
 .video-modal.active{opacity:1;pointer-events:auto;}
-.video-modal video{width:90%;max-width:400px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.5);display:none;}
-.close-hint{position:absolute;top:40px;color:white;font-family:var(--font-sans);font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:0.85rem;opacity:0.7;}
-@media (max-width:768px){.hero h1{font-size:3rem;}.highlights{margin-top:2rem;padding:2rem 5%;}.container,.tips-section{padding:2rem 5%;}.easter-btn{right:20px;width:55px;height:55px;font-size:26px;}#beerBtn{bottom:20px;}#rouletteBtn{bottom:90px;}}
+.video-modal video{width:90%;max-width:380px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.4);display:none;}
+.close-hint{position:absolute;top:50px;color:rgba(255,255,255,0.6);font-family:var(--font-sans);font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:0.8rem;}
+@media (max-width:768px){.hero h1{font-size:3.2rem;}.highlights{margin-top:2rem;padding:2rem 5%;}.container,.tips-section{padding:3rem 5%;}.easter-btn{right:20px;width:55px;height:55px;font-size:24px;}#beerBtn{bottom:20px;}#rouletteBtn{bottom:90px;}.day-card{padding:2rem;}}
 </style>
 </head>
 <body>
@@ -87,87 +88,87 @@ footer p{color:#aaa;font-size:0.9rem;}
   <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
   <div class="hero-overlay"></div>
   <div class="badges">
-    <div class="badge">Sep 5 - 9, 2026</div><div class="badge">North + South Goa</div><div class="badge">Pawan, Akram, Prayag & Abhishek</div>
+    <div class="badge">Sep 5 - 9, 2026</div><div class="badge">North + South Goa</div><div class="badge">The Crew</div>
   </div>
   <h1>Five days. Two coasts.<br>One legendary escape.</h1>
   <p>Beaches, history, massive club nights in the North. Serene lagoons and hidden gems down South. Here's our final game plan.</p>
-  <a href="#itinerary" class="btn">See the day-by-day plan</a>
+  <a href="#itinerary" class="btn">See the itinerary</a>
 </header>
 
 <section class="highlights">
-  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
     <img src="baga.png" class="media-bg" alt="Baga Beach"><div class="highlight-overlay"></div>
     <div><h3>Party & Adventure</h3><p>Tito's, Hilltop, Vagator – intense energy and dancing all night.</p></div>
   </div>
-  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
     <img src="palolem.JPG" class="media-bg" alt="Palolem Beach"><div class="highlight-overlay"></div>
-    <div><h3>Calm & Hidden Gems</h3><p>Sweet Water Lake, Cola, Agonda – secret sands and quiet golden sunsets.</p></div>
+    <div><h3>Calm & Hidden Gems</h3><p>Sweet Water Lake, Cola, Agonda – secret sands and golden sunsets.</p></div>
   </div>
-  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
     <img src="chapora.JPG" class="media-bg" alt="Chapora Fort"><div class="highlight-overlay"></div>
-    <div><h3>Forts & Views</h3><p>Chapora and Cabo de Rama – breathtaking cliffside views over the Arabian Sea.</p></div>
+    <div><h3>Forts & Views</h3><p>Chapora and Cabo de Rama – breathtaking cliffside views.</p></div>
   </div>
 </section>
 
 <main class="container" id="itinerary">
   
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">OUR NORTH HQ</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our North HQ</small>
     <h2>The Plix Villa</h2>
-    <p>Our private 3BHK basecamp in Anjuna. Private pool, beach access, and space for the whole crew.</p>
+    <p>Our private 3BHK basecamp in Anjuna. Private pool, beach access, and space for the crew.</p>
   </div>
 
-  <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom:5rem;">
+  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:6rem;">
     <div class="carousel-container">
       <div class="carousel-track">
         <img src="Villa 1.jpg" class="carousel-slide" alt="HQ"><img src="Villa 2.jpg" class="carousel-slide" alt="HQ"><img src="Villa 3.jpg" class="carousel-slide" alt="HQ">
       </div>
-      <div class="carousel-hint">Swipe to see more ➔</div>
+      <div class="carousel-hint">Swipe gallery ➔</div>
     </div>
     
-    <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
-      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">👥 11 Guests Max</div>
-      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🛏️ 3 King Bedrooms</div>
-      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🏊 Private Pool</div>
+    <div style="display:flex;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+      <div class="badge" style="background:rgba(255,255,255,0.8);color:var(--text-dark);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;">👥 Premium Villa</div>
+      <div class="badge" style="background:rgba(255,255,255,0.8);color:var(--text-dark);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;">🛏️ 3 King Bedrooms</div>
+      <div class="badge" style="background:rgba(255,255,255,0.8);color:var(--text-dark);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;">🏊 Private Pool</div>
     </div>
-    <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.1);padding-top:1.25rem;">
-      <a href="https://www.airbnb.com/rooms/1744839926958430462?unique_share_id=c61706c5-c1f4-462c-b86b-f720a81868b6&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">north airbnb ↗</a>
+    <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.08);padding-top:1.5rem;">
+      <a href="https://www.airbnb.com/rooms/1744839926958430462?unique_share_id=c61706c5-c1f4-462c-b86b-f720a81868b6&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">View on Airbnb ↗</a>
     </div>
   </div>
 
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">DAYS 1 - 2</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Days 1 - 2</small>
     <h2>North Goa</h2>
     <p>High-energy, buzzing beaches, bohemian markets, and legendary nightlife.</p>
   </div>
 
   <div class="itinerary-grid">
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-      <div class="day-badge">DAY 1 - Sat, Sep 5th</div>
+    <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
+      <div class="day-badge">Day 1 - Sat, Sep 5th</div>
       <h3>Arrival & First Sunset</h3>
-      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>13:20 PM - Touchdown at GOX</h4><p>SpiceJet SG 815 lands at Mopa. Grab rentals and hit the road to Anjuna.</p><div class="timeline-meta">🚗 28 km to HQ | 📍 <a href="https://maps.app.goo.gl/KDFsR" target="_blank">Mopa Airport</a></div></div></div>
-      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>15:00 PM - Check-in & Chill</h4><p>Drop bags at Plix Villa, grab high-protein lunch, and crack open beers by the pool.</p><div class="timeline-meta">📍 <a href="https://maps.app.goo.gl/Anjuna" target="_blank">Anjuna</a></div></div></div>
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>17:30 PM - Sunset at Vagator</h4><p>Iconic red cliffs, deep house music, and a legendary sunset view.</p><div class="timeline-meta">🚗 4 km from HQ | 🎥 <a href="https://www.youtube.com/results?search_query=vagator+beach+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>22:00 PM - The Opening Party</h4><p>Pre-game at the villa, then head to Tito's Lane or Hilltop to kick off the trip.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>1:20 PM - Touchdown at GOX</h4><p>SpiceJet SG 815 lands at Mopa. Grab rentals and hit the road to Anjuna.</p><div class="timeline-meta">🚗 28 km to HQ | 📍 <a href="https://maps.app.goo.gl/KDFsR" target="_blank">Mopa Airport</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>3:00 PM - Check-in & Chill</h4><p>Drop bags at Plix Villa, grab high-protein lunch, and crack open beers by the pool.</p><div class="timeline-meta">📍 <a href="https://maps.app.goo.gl/Anjuna" target="_blank">Anjuna</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>5:30 PM - Sunset at Vagator</h4><p>Iconic red cliffs, deep house music, and a legendary sunset view.</p><div class="timeline-meta">🚗 4 km from HQ | 🎥 <a href="https://www.youtube.com/results?search_query=vagator+beach+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>10:00 PM - The Opening Party</h4><p>Pre-game at the villa, then head to Tito's Lane or Hilltop to kick off the trip.</p></div></div>
     </div>
 
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-      <div class="day-badge">DAY 2 - Sun, Sep 6th</div>
+    <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
+      <div class="day-badge">Day 2 - Sun, Sep 6th</div>
       <h3>Hidden Gems & Epic Night</h3>
       <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>11:30 AM - Hangover Cure Brunch</h4><p>Late start. Head to Artjuna for espresso and massive paneer/egg breakfast.</p></div></div>
-      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>13:30 PM - Sweet Water Lake</h4><p>Drive up to Arambol for a stunning freshwater lake separated from the ocean.</p><div class="timeline-meta">🚗 18 km | 🎥 <a href="https://www.youtube.com/results?search_query=sweet+water+lake+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>17:00 PM - Chapora Fort</h4><p>Classic 'Dil Chahta Hai' fort. Great place for crew photos overlooking Vagator.</p></div></div>
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>22:00 PM - Club Cubana</h4><p>The "Nightclub in the Sky". Grab drinks and experience Goa's multi-level party.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>1:30 PM - Sweet Water Lake</h4><p>Drive up to Arambol for a stunning freshwater lake separated from the ocean.</p><div class="timeline-meta">🚗 18 km | 🎥 <a href="https://www.youtube.com/results?search_query=sweet+water+lake+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>5:00 PM - Chapora Fort</h4><p>Classic 'Dil Chahta Hai' fort. Great place for crew photos overlooking Vagator.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>10:00 PM - Club Cubana</h4><p>The "Nightclub in the Sky". Grab drinks and experience Goa's multi-level party.</p></div></div>
     </div>
   </div>
 
-  <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom:3rem;">
-    <div class="day-badge">DAY 3 - Mon, Sep 7th</div>
+  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:4rem;">
+    <div class="day-badge">Day 3 - Mon, Sep 7th</div>
     <h3>Culture, Transition & Lagoons</h3>
     <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>10:30 AM - Checkout & Fontainhas</h4><p>Stop halfway in Panjim at Fontainhas for photos on the vibrant streets.</p></div></div>
-    <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>14:30 PM - Check-in South HQ</h4><p>Arrive at the South Goa Retreat. Claim beds and take a breather.</p></div></div>
-    <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>16:30 PM - Cola Beach Lagoon</h4><p>Navigate a bumpy dirt road to a secret crescent beach and emerald lagoon.</p><div class="timeline-meta">🚗 10 km from HQ | 🎥 <a href="https://www.youtube.com/results?search_query=cola+beach+goa+lagoon+shorts" target="_blank">Vibe Check</a></div></div></div>
-    <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>20:00 PM - Shack Dinner</h4><p>Grab fresh catch and heavy carbs at an Agonda shack to fuel up.</p></div></div>
+    <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>2:30 PM - Check-in South HQ</h4><p>Arrive at the South Goa Retreat. Claim beds and take a breather.</p></div></div>
+    <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>4:30 PM - Cola Beach Lagoon</h4><p>Navigate a bumpy dirt road to a secret crescent beach and emerald lagoon.</p><div class="timeline-meta">🚗 10 km from HQ | 🎥 <a href="https://www.youtube.com/results?search_query=cola+beach+goa+lagoon+shorts" target="_blank">Vibe Check</a></div></div></div>
+    <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>8:00 PM - Shack Dinner</h4><p>Grab fresh catch and heavy carbs at an Agonda shack to fuel up.</p></div></div>
   </div>
 
   <div class="motion-section">
@@ -175,55 +176,55 @@ footer p{color:#aaa;font-size:0.9rem;}
     <div class="video-wrapper"><video autoplay muted loop playsinline><source src="Video 1.mp4" type="video/mp4"></video></div>
   </div>
 
-  <hr style="border:0;height:1px;background:rgba(0,0,0,0.1);margin:4rem 0;">
+  <hr style="border:0;height:1px;background:rgba(0,0,0,0.08);margin:5rem 0;">
 
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">OUR SOUTH HQ</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our South HQ</small>
     <h2>South Goa Retreat</h2>
     <p>Our peaceful secondary basecamp. Perfect for unwinding after the North Goa chaos.</p>
   </div>
 
-  <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom:5rem;">
+  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:6rem;">
     <div class="carousel-container">
       <div class="carousel-track">
         <img src="Villa 4.jpg" class="carousel-slide" alt="South"><img src="Villa 5.jpg" class="carousel-slide" alt="South"><img src="Villa 6.jpg" class="carousel-slide" alt="South">
       </div>
-      <div class="carousel-hint">Swipe to see more ➔</div>
+      <div class="carousel-hint">Swipe gallery ➔</div>
     </div>
     
-    <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
-      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">👥 Crew Size</div>
-      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🛏️ Comfortable Rooms</div>
-      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🌴 Nature Vibes</div>
+    <div style="display:flex;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap;">
+      <div class="badge" style="background:rgba(255,255,255,0.8);color:var(--text-dark);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;">👥 The Crew</div>
+      <div class="badge" style="background:rgba(255,255,255,0.8);color:var(--text-dark);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;">🛏️ Comfortable Rooms</div>
+      <div class="badge" style="background:rgba(255,255,255,0.8);color:var(--text-dark);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;">🌴 Nature Vibes</div>
     </div>
-    <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.1);padding-top:1.25rem;">
-      <a href="https://www.airbnb.co.uk/rooms/1671532681424276576?unique_share_id=f4d083b3-1722-4329-918f-4c02867295a9&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">south airbnb ↗</a>
+    <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.08);padding-top:1.5rem;">
+      <a href="https://www.airbnb.co.uk/rooms/1671532681424276576?unique_share_id=f4d083b3-1722-4329-918f-4c02867295a9&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">View on Airbnb ↗</a>
     </div>
   </div>
 
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">DAYS 4 - 5</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Days 4 - 5</small>
     <h2>South Goa</h2>
     <p>Serene crescent bays, sweetwater lagoons, ancient forts, and pristine sunsets.</p>
   </div>
 
   <div class="itinerary-grid">
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-      <div class="day-badge">DAY 4 - Tue, Sep 8th</div>
+    <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
+      <div class="day-badge">Day 4 - Tue, Sep 8th</div>
       <h3>Forts, Serenity & Silent Parties</h3>
       <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>11:00 AM - Lazy Wake Up</h4><p>Make a quick Moka pot coffee at the Airbnb and prep for the day.</p></div></div>
-      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>13:00 PM - Cabo de Rama</h4><p>Ancient ruins with sweeping views. Hike down to the hidden Pebble Beach.</p><div class="timeline-meta">🎥 <a href="https://www.youtube.com/results?search_query=cabo+de+rama+pebble+beach+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>16:30 PM - Palolem Beach Sunset</h4><p>Take a cheap boat ride out to Butterfly Beach or just grab beers on the sand.</p></div></div>
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>20:00 PM - Neptune Point Silent Party</h4><p>Grab a headset, choose your DJ channel, and rave on the beach to end the trip.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>1:00 PM - Cabo de Rama</h4><p>Ancient ruins with sweeping views. Hike down to the hidden Pebble Beach.</p><div class="timeline-meta">🎥 <a href="https://www.youtube.com/results?search_query=cabo+de+rama+pebble+beach+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>4:30 PM - Palolem Beach Sunset</h4><p>Take a cheap boat ride out to Butterfly Beach or just grab beers on the sand.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>8:00 PM - Neptune Point Silent Party</h4><p>Grab a headset, choose your DJ channel, and rave on the beach to end the trip.</p></div></div>
     </div>
 
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-      <div class="day-badge">DAY 5 - Wed, Sep 9th</div>
+    <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
+      <div class="day-badge">Day 5 - Wed, Sep 9th</div>
       <h3>Last Moments & Departure</h3>
       <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>10:00 AM - Final Breakfast</h4><p>One last solid meal by the sea before the travel begins.</p></div></div>
       <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>11:00 AM - Checkout HQ</h4><p>Pack up the bags and say goodbye to South Goa.</p></div></div>
       <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>12:00 PM - Drive to GOI</h4><p>Head North towards Dabolim Airport. Leave early to avoid stress.</p><div class="timeline-meta">🚗 60 km (~1.5 hrs)</div></div></div>
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>15:20 PM - Flight 6E 6264</h4><p>IndiGo flight takes off. Wheels down in New Delhi by 18:00.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>3:20 PM - Flight 6E 6264</h4><p>IndiGo flight takes off. Wheels down in New Delhi by 6:00 PM.</p></div></div>
     </div>
   </div>
 
@@ -235,11 +236,11 @@ footer p{color:#aaa;font-size:0.9rem;}
 
 <section class="tips-section">
   <h2>Rules for the Crew</h2>
-  <p>A few things to keep Pawan, Akram, Prayag, and Abhishek alive and thriving.</p>
+  <p>A few things to keep everyone alive and thriving.</p>
   <div class="tips-grid">
-    <div class="tip-card tilt-card" data-tilt data-tilt-max="5"><h4>Transportation</h4><p>Rent scooters for the North to beat traffic. Use cabs for transition to South.</p></div>
-    <div class="tip-card tilt-card" data-tilt data-tilt-max="5"><h4>Hydration Protocol</h4><p>Force everyone to drink tender coconut water every morning.</p></div>
-    <div class="tip-card tilt-card" data-tilt data-tilt-max="5"><h4>Go with the Flow</h4><p>It's a boys' trip. If you sleep in, sleep in. Vibe over schedule.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Transportation</h4><p>Rent scooters for the North to beat traffic. Use cabs for transition to South.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Hydration Protocol</h4><p>Force everyone to drink tender coconut water every morning.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Go with the Flow</h4><p>It's a boys' trip. If you sleep in, sleep in. Vibe over schedule.</p></div>
   </div>
 </section>
 
