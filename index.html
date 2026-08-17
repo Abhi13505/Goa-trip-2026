@@ -1,876 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Goa '26 - The Ultimate Escape</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --text-dark: #2d2a26;
-      --accent-orange: #f26d52;
-      --card-bg: rgba(255, 255, 255, 0.4);
-      --font-serif: 'Playfair Display', serif;
-      --font-sans: 'Inter', sans-serif;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    body {
-      font-family: var(--font-sans);
-      background-color: #f4f0ea;
-      color: var(--text-dark);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* -------------------------------------
-       Surreal 3D Background Orbs
-    -------------------------------------- */
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(60px);
-      z-index: -3;
-      animation: float 12s infinite ease-in-out alternate;
-    }
-    .orb-1 {
-      width: 400px; height: 400px;
-      background: linear-gradient(to bottom right, #f26d52, #ffb347);
-      top: -10%; left: -10%;
-    }
-    .orb-2 {
-      width: 500px; height: 500px;
-      background: linear-gradient(to bottom right, #00a8cc, #005c99);
-      bottom: -15%; right: -10%;
-      animation-delay: -5s;
-    }
-    .orb-3 {
-      width: 300px; height: 300px;
-      background: linear-gradient(to bottom right, #ff9a9e, #fecfef);
-      top: 40%; left: 50%;
-      transform: translateX(-50%);
-      animation-delay: -2s;
-    }
-    @keyframes float {
-      0% { transform: translateY(0) scale(1) translateX(0); }
-      100% { transform: translateY(-80px) scale(1.1) translateX(40px); }
-    }
-
-    h1, h2, h3, h4 { font-family: var(--font-serif); }
-
-    .media-bg {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      object-fit: cover;
-      z-index: -2;
-    }
-
-    /* Hero Section */
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 10%;
-      color: white;
-      overflow: hidden;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: -1;
-    }
-
-    .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; line-height: 1.1; transform: translateZ(50px); }
-    .hero p { max-width: 600px; font-size: 1.2rem; margin-bottom: 2rem; transform: translateZ(40px); }
-    
-    .badges { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; transform: translateZ(30px); }
-    .badge {
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      padding: 0.75rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 600;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-    }
-
-    .btn {
-      display: inline-block;
-      background-color: var(--accent-orange);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: opacity 0.3s ease;
-      align-self: flex-start;
-      transform: translateZ(40px);
-    }
-    .btn:hover { opacity: 0.9; }
-
-    /* 3D Glassmorphism Cards */
-    .tilt-card {
-      transform-style: preserve-3d;
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.6);
-      box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-    }
-    /* Elements inside tilt-cards pop out in 3D */
-    .tilt-card > * {
-      transform: translateZ(30px);
-    }
-
-    /* Highlights Section */
-    .highlights {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      padding: 4rem 10%;
-      margin-top: -80px;
-      position: relative;
-      z-index: 2;
-      transform-style: preserve-3d;
-    }
-
-    .highlight-card {
-      position: relative;
-      border-radius: 16px;
-      overflow: hidden;
-      height: 200px;
-      display: flex;
-      align-items: flex-end;
-      padding: 1.5rem;
-      color: white;
-      transform-style: preserve-3d;
-    }
-    .highlight-card > div { transform: translateZ(40px); }
-    
-    .highlight-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1));
-      z-index: -1;
-      transform: translateZ(0); /* stays flat */
-    }
-
-    .highlight-card h3 { font-size: 1.5rem; margin-bottom: 0.25rem; }
-    .highlight-card p { font-size: 0.9rem; opacity: 0.9; }
-
-    /* Itinerary Container */
-    .container { padding: 4rem 10%; position: relative; z-index: 2; }
-    .section-header { margin-bottom: 3rem; }
-    .section-header h2 { font-size: 3rem; margin-bottom: 0.5rem; }
-    .section-header p { color: #666; font-size: 1.1rem; }
-
-    .itinerary-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-      margin-bottom: 4rem;
-    }
-
-    .day-card {
-      border-radius: 20px;
-      padding: 2.5rem;
-    }
-
-    .day-badge {
-      display: inline-block;
-      background: rgba(255,255,255,0.7);
-      color: var(--accent-orange);
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-    }
-    
-    .day-card h3 { font-size: 1.8rem; margin-bottom: 2rem; }
-
-    .timeline-item {
-      display: flex;
-      margin-bottom: 1.5rem;
-      position: relative;
-    }
-    .timeline-icon {
-      background: rgba(255,255,255,0.8);
-      color: var(--accent-orange);
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 1rem;
-      flex-shrink: 0;
-      font-weight: bold;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .timeline-content h4 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .timeline-content p { font-size: 0.9rem; color: #555; }
-
-    /* Carousel Slideshow Styles */
-    .carousel-container {
-      width: 100%;
-      margin-bottom: 2rem;
-      transform: translateZ(40px);
-    }
-    .carousel-track {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 15px;
-      padding-bottom: 10px;
-      scrollbar-width: none; 
-      -ms-overflow-style: none;
-    }
-    .carousel-track::-webkit-scrollbar { display: none; }
-    .carousel-slide {
-      flex: 0 0 100%;
-      scroll-snap-align: center;
-      height: 350px;
-      object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    .carousel-hint {
-      text-align: center;
-      font-size: 0.85rem;
-      color: #666;
-      margin-top: 0.5rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-
-    /* Motion Portrait Video Sections */
-    .motion-section { margin-bottom: 5rem; }
-    .motion-section h3 { font-size: 1.5rem; margin-bottom: 1.5rem; }
-    .video-wrapper {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-    }
-    .video-wrapper video { 
-      width: 100%; 
-      max-width: 350px; 
-      height: auto; 
-      border-radius: 20px; 
-      box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
-      background: #000; 
-    }
-
-    /* Tips Section */
-    .tips-section { 
-      background: rgba(255, 255, 255, 0.2); 
-      backdrop-filter: blur(15px);
-      padding: 4rem 10%; 
-      text-align: center; 
-      position: relative;
-      z-index: 2;
-    }
-    .tips-section h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .tips-section > p { margin-bottom: 3rem; color: #555; }
-    
-    .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-    .tip-card {
-      background: rgba(255, 255, 255, 0.7);
-      padding: 1.5rem;
-      border-radius: 12px;
-      text-align: left;
-      border: 1px solid rgba(255,255,255,0.8);
-    }
-    .tip-card h4 { color: var(--accent-orange); font-family: var(--font-sans); margin-bottom: 0.5rem; }
-    .tip-card p { font-size: 0.9rem; color: #444; }
-
-    /* Footer */
-    footer {
-      background: rgba(45, 42, 38, 0.95);
-      backdrop-filter: blur(10px);
-      color: white;
-      text-align: center;
-      padding: 3rem 10%;
-      padding-bottom: 8rem;
-      position: relative;
-      z-index: 2;
-    }
-    footer h3 { margin-bottom: 0.5rem; }
-    footer p { color: #aaa; font-size: 0.9rem; }
-    
-    /* Subtle Link Styles */
-    .subtle-link {
-      color: #666; 
-      text-decoration: none; 
-      font-size: 0.85rem; 
-      font-weight: 600; 
-      transition: color 0.2s ease;
-    }
-    .subtle-link:hover {
-      color: var(--accent-orange);
-    }
-
-    /* -------------------------------------
-       Easter Egg Floating Buttons
-    -------------------------------------- */
-    @keyframes subtle-shake {
-      0%, 85%, 100% { transform: rotate(0deg); }
-      88% { transform: rotate(-10deg); }
-      91% { transform: rotate(10deg); }
-      94% { transform: rotate(-10deg); }
-      97% { transform: rotate(5deg); }
-    }
-
-    .easter-btn {
-      position: fixed;
-      right: 25px;
-      background: var(--accent-orange);
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(242, 109, 82, 0.4);
-      z-index: 100;
-      border: 3px solid white;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      animation: subtle-shake 4s infinite ease-in-out;
-    }
-    
-    .easter-btn:active {
-      transform: scale(0.90) !important; 
-      animation: none;
-    }
-
-    #beerBtn { bottom: 25px; animation-delay: 0s; }
-    #rouletteBtn { bottom: 100px; animation-delay: 2s; }
-    
-    /* Easter Egg Video Modal */
-    .video-modal {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-    .video-modal.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .video-modal video {
-      width: 90%;
-      max-width: 400px;
-      border-radius: 16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      display: none; 
-    }
-    .close-hint {
-      position: absolute;
-      top: 40px;
-      color: white;
-      font-family: var(--font-sans);
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      font-size: 0.85rem;
-      opacity: 0.7;
-    }
-    
-    @media (max-width: 768px) {
-      .hero h1 { font-size: 3rem; }
-      .highlights { margin-top: 2rem; padding: 2rem 5%; }
-      .container, .tips-section { padding: 2rem 5%; }
-      .easter-btn { right: 20px; width: 55px; height: 55px; font-size: 26px; }
-      #beerBtn { bottom: 20px; }
-      #rouletteBtn { bottom: 90px; }
-    }
-  </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Goa '26 - The Ultimate Escape</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--text-dark:#2d2a26;--accent-orange:#f26d52;--card-bg:rgba(255,255,255,0.4);--font-serif:'Playfair Display',serif;--font-sans:'Inter',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-sans);background-color:#f4f0ea;color:var(--text-dark);line-height:1.6;overflow-x:hidden;}
+.orb{position:fixed;border-radius:50%;filter:blur(60px);z-index:-3;animation:float 12s infinite ease-in-out alternate;}
+.orb-1{width:400px;height:400px;background:linear-gradient(to bottom right,#f26d52,#ffb347);top:-10%;left:-10%;}
+.orb-2{width:500px;height:500px;background:linear-gradient(to bottom right,#00a8cc,#005c99);bottom:-15%;right:-10%;animation-delay:-5s;}
+.orb-3{width:300px;height:300px;background:linear-gradient(to bottom right,#ff9a9e,#fecfef);top:40%;left:50%;transform:translateX(-50%);animation-delay:-2s;}
+@keyframes float{0%{transform:translateY(0) scale(1) translateX(0);}100%{transform:translateY(-80px) scale(1.1) translateX(40px);}}
+h1,h2,h3,h4{font-family:var(--font-serif);}
+.media-bg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;}
+.hero{position:relative;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 10%;color:white;overflow:hidden;}
+.hero-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:-1;}
+.hero h1{font-size:4.5rem;margin-bottom:1rem;line-height:1.1;transform:translateZ(50px);}
+.hero p{max-width:600px;font-size:1.2rem;margin-bottom:2rem;transform:translateZ(40px);}
+.badges{display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;transform:translateZ(30px);}
+.badge{background:rgba(255,255,255,0.2);backdrop-filter:blur(10px);padding:0.75rem 1.5rem;border-radius:50px;font-weight:600;border:1px solid rgba(255,255,255,0.4);}
+.btn{display:inline-block;background-color:var(--accent-orange);color:white;padding:1rem 2rem;border-radius:50px;text-decoration:none;font-weight:600;transition:opacity 0.3s;align-self:flex-start;transform:translateZ(40px);}
+.btn:hover{opacity:0.9;}
+.tilt-card{transform-style:preserve-3d;background:var(--card-bg);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.6);box-shadow:0 25px 45px rgba(0,0,0,0.1);}
+.tilt-card > *{transform:translateZ(30px);}
+.highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;padding:4rem 10%;margin-top:-80px;position:relative;z-index:2;transform-style:preserve-3d;}
+.highlight-card{position:relative;border-radius:16px;overflow:hidden;height:200px;display:flex;align-items:flex-end;padding:1.5rem;color:white;transform-style:preserve-3d;}
+.highlight-card > div{transform:translateZ(40px);}
+.highlight-overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to top,rgba(0,0,0,0.9),rgba(0,0,0,0.1));z-index:-1;transform:translateZ(0);}
+.highlight-card h3{font-size:1.5rem;margin-bottom:0.25rem;}
+.highlight-card p{font-size:0.9rem;opacity:0.9;}
+.container{padding:4rem 10%;position:relative;z-index:2;}
+.section-header{margin-bottom:3rem;}
+.section-header h2{font-size:3rem;margin-bottom:0.5rem;}
+.section-header p{color:#666;font-size:1.1rem;}
+.itinerary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2rem;margin-bottom:4rem;}
+.day-card{border-radius:20px;padding:2.5rem;}
+.day-badge{display:inline-block;background:rgba(255,255,255,0.7);color:var(--accent-orange);padding:0.4rem 1rem;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem;}
+.day-card h3{font-size:1.8rem;margin-bottom:2rem;}
+.timeline-item{display:flex;margin-bottom:2rem;position:relative;}
+.timeline-icon{background:rgba(255,255,255,0.8);color:var(--accent-orange);width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:1rem;flex-shrink:0;font-weight:bold;box-shadow:0 4px 10px rgba(0,0,0,0.05);}
+.timeline-content h4{font-family:var(--font-sans);font-size:1.05rem;font-weight:600;margin-bottom:0.35rem;}
+.timeline-content p{font-size:0.95rem;color:#444;line-height:1.5;}
+.timeline-meta{font-size:0.8rem;color:#777;margin-top:8px;background:rgba(0,0,0,0.03);padding:6px 10px;border-radius:8px;display:inline-block;}
+.timeline-meta a{color:var(--accent-orange);text-decoration:none;font-weight:600;}
+.timeline-meta a:hover{text-decoration:underline;}
+.carousel-container{width:100%;margin-bottom:2rem;transform:translateZ(40px);}
+.carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding-bottom:10px;scrollbar-width:none;-ms-overflow-style:none;}
+.carousel-track::-webkit-scrollbar{display:none;}
+.carousel-slide{flex:0 0 100%;scroll-snap-align:center;height:350px;object-fit:cover;border-radius:12px;box-shadow:0 10px 25px rgba(0,0,0,0.1);}
+.carousel-hint{text-align:center;font-size:0.85rem;color:#666;margin-top:0.5rem;font-weight:600;letter-spacing:0.5px;}
+.motion-section{margin-bottom:5rem;}
+.motion-section h3{font-size:1.5rem;margin-bottom:1.5rem;}
+.video-wrapper{width:100%;display:flex;justify-content:center;}
+.video-wrapper video{width:100%;max-width:350px;height:auto;border-radius:20px;box-shadow:0 25px 45px rgba(0,0,0,0.15);background:#000;}
+.tips-section{background:rgba(255,255,255,0.2);backdrop-filter:blur(15px);padding:4rem 10%;text-align:center;position:relative;z-index:2;}
+.tips-section h2{font-size:2.5rem;margin-bottom:0.5rem;}
+.tips-section > p{margin-bottom:3rem;color:#555;}
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+.tip-card{background:rgba(255,255,255,0.7);padding:1.5rem;border-radius:12px;text-align:left;border:1px solid rgba(255,255,255,0.8);}
+.tip-card h4{color:var(--accent-orange);font-family:var(--font-sans);margin-bottom:0.5rem;}
+.tip-card p{font-size:0.9rem;color:#444;}
+footer{background:rgba(45,42,38,0.95);backdrop-filter:blur(10px);color:white;text-align:center;padding:3rem 10% 8rem;position:relative;z-index:2;}
+footer h3{margin-bottom:0.5rem;}
+footer p{color:#aaa;font-size:0.9rem;}
+.subtle-link{color:#666;text-decoration:none;font-size:0.85rem;font-weight:600;transition:color 0.2s;}
+.subtle-link:hover{color:var(--accent-orange);}
+@keyframes subtle-shake{0%,85%,100%{transform:rotate(0deg);}88%,94%{transform:rotate(-10deg);}91%{transform:rotate(10deg);}97%{transform:rotate(5deg);}}
+.easter-btn{position:fixed;right:25px;background:var(--accent-orange);width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;cursor:pointer;box-shadow:0 8px 25px rgba(242,109,82,0.4);z-index:100;border:3px solid white;transition:transform 0.2s,box-shadow 0.2s;animation:subtle-shake 4s infinite ease-in-out;}
+.easter-btn:active{transform:scale(0.90) !important;animation:none;}
+#beerBtn{bottom:25px;animation-delay:0s;}
+#rouletteBtn{bottom:100px;animation-delay:2s;}
+.video-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.9);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.video-modal.active{opacity:1;pointer-events:auto;}
+.video-modal video{width:90%;max-width:400px;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,0.5);display:none;}
+.close-hint{position:absolute;top:40px;color:white;font-family:var(--font-sans);font-weight:600;letter-spacing:1px;text-transform:uppercase;font-size:0.85rem;opacity:0.7;}
+@media (max-width:768px){.hero h1{font-size:3rem;}.highlights{margin-top:2rem;padding:2rem 5%;}.container,.tips-section{padding:2rem 5%;}.easter-btn{right:20px;width:55px;height:55px;font-size:26px;}#beerBtn{bottom:20px;}#rouletteBtn{bottom:90px;}}
+</style>
 </head>
 <body>
 
-  <!-- Surreal Pure CSS Orbs -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-  <div class="orb orb-3"></div>
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
-    <div class="hero-overlay"></div>
-    <div class="badges">
-      <div class="badge">5 Days<br><small>Sep 5 - 9, 2026</small></div>
-      <div class="badge">North + South<br><small>Two coasts, one trip</small></div>
-      <div class="badge">The Crew<br><small>Boys' trip meets zen</small></div>
-    </div>
-    <h1>Five days. Two coasts.<br>One legendary escape.</h1>
-    <p>Beaches, history, flea markets, and after-dark parties in the North. Serene crescent sands and hidden gems down South. Here's our full game plan for Goa 2026.</p>
-    <a href="#itinerary" class="btn">See the day-by-day plan</a>
-  </header>
+<header class="hero">
+  <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
+  <div class="hero-overlay"></div>
+  <div class="badges">
+    <div class="badge">Sep 5 - 9, 2026</div><div class="badge">North + South Goa</div><div class="badge">Pawan, Akram, Prayag & Abhishek</div>
+  </div>
+  <h1>Five days. Two coasts.<br>One legendary escape.</h1>
+  <p>Beaches, history, massive club nights in the North. Serene lagoons and hidden gems down South. Here's our final game plan.</p>
+  <a href="#itinerary" class="btn">See the day-by-day plan</a>
+</header>
 
-  <!-- Highlights -->
-  <section class="highlights">
-    <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
-      <img src="baga.png" class="media-bg" alt="Baga Beach">
-      <div class="highlight-overlay"></div>
-      <div>
-        <h3>Party & Adventure</h3>
-        <p>Baga, Anjuna, Vagator – intense energy and dancing all night.</p>
-      </div>
-    </div>
-    <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
-      <img src="palolem.JPG" class="media-bg" alt="Palolem Beach">
-      <div class="highlight-overlay"></div>
-      <div>
-        <h3>Calm & Hidden Gems</h3>
-        <p>Palolem, Cola, Agonda – serene sands and quiet golden sunsets.</p>
-      </div>
-    </div>
-    <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
-      <img src="chapora.JPG" class="media-bg" alt="Chapora Fort">
-      <div class="highlight-overlay"></div>
-      <div>
-        <h3>Forts & Views</h3>
-        <p>Chapora and Cabo de Rama – cliffside views over the Arabian Sea.</p>
-      </div>
-    </div>
-  </section>
+<section class="highlights">
+  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+    <img src="baga.png" class="media-bg" alt="Baga Beach"><div class="highlight-overlay"></div>
+    <div><h3>Party & Adventure</h3><p>Tito's, Hilltop, Vagator – intense energy and dancing all night.</p></div>
+  </div>
+  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+    <img src="palolem.JPG" class="media-bg" alt="Palolem Beach"><div class="highlight-overlay"></div>
+    <div><h3>Calm & Hidden Gems</h3><p>Sweet Water Lake, Cola, Agonda – secret sands and quiet golden sunsets.</p></div>
+  </div>
+  <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
+    <img src="chapora.JPG" class="media-bg" alt="Chapora Fort"><div class="highlight-overlay"></div>
+    <div><h3>Forts & Views</h3><p>Chapora and Cabo de Rama – breathtaking cliffside views over the Arabian Sea.</p></div>
+  </div>
+</section>
 
-  <!-- Main Container -->
-  <main class="container" id="itinerary">
-    
-    <!-- THE NORTH HQ -->
-    <div class="section-header">
-      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">OUR NORTH HQ</small>
-      <h2>The Plix Villa</h2>
-      <p>Our private 3BHK basecamp in Anjuna. Private pool, beach access, and space for the whole crew.</p>
-    </div>
-
-    <!-- 3D Glass Card -->
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="margin-bottom: 5rem;">
-      
-      <!-- Swipeable Photo Gallery (Updated to .jpg) -->
-      <div class="carousel-container">
-        <div class="carousel-track">
-          <img src="Villa 1.jpg" class="carousel-slide" alt="The Plix Villa - Photo 1">
-          <img src="Villa 2.jpg" class="carousel-slide" alt="The Plix Villa - Photo 2">
-          <img src="Villa 3.jpg" class="carousel-slide" alt="The Plix Villa - Photo 3">
-        </div>
-        <div class="carousel-hint">Swipe to see more ➔</div>
-      </div>
-      
-      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">👥 11 Guests Max</div>
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🛏️ 3 King Bedrooms</div>
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🏊 Private Pool</div>
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🌴 Beach Access</div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-        <div>
-          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">Full House Rules</h4>
-          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
-            <li><strong>Check-in:</strong> After 1:00 PM</li>
-            <li><strong>Checkout:</strong> Before 10:00 AM</li>
-            <li>Maximum 11 guests allowed overnight.</li>
-            <li>No smoking inside the villa.</li>
-            <li>Quiet hours outside and by the pool after 10:00 PM.</li>
-            <li>No unregistered guests.</li>
-            <li>Wash own dishes before checking out.</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">Top Amenities</h4>
-          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
-            <li>High-speed WiFi</li>
-            <li>Fully equipped kitchen</li>
-            <li>3 Bathrooms</li>
-            <li>Dedicated workspace</li>
-            <li>Air conditioning in all rooms</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Subtle Airbnb Link -->
-      <div style="text-align: right; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.25rem;">
-        <a href="https://www.airbnb.com/rooms/1744839926958430462?unique_share_id=c61706c5-c1f4-462c-b86b-f720a81868b6&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">
-          north airbnb ↗
-        </a>
-      </div>
-    </div>
-
-    <!-- North Goa Itinerary Header -->
-    <div class="section-header">
-      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 1 - 2</small>
-      <h2>North Goa</h2>
-      <p>High-energy, buzzing beaches, bohemian markets, and legendary nightlife.</p>
-    </div>
-
-    <div class="itinerary-grid">
-      <!-- Day 1 -->
-      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-        <div class="day-badge">DAY 1 - Fri, Sep 5th</div>
-        <h3>Arrival & First Sunset</h3>
-        
-        <div class="timeline-item">
-          <div class="timeline-icon">1</div>
-          <div class="timeline-content">
-            <h4>Land & Check-in</h4>
-            <p>Touch down, drop the bags at the North Goa base, and grab the scooters.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">2</div>
-          <div class="timeline-content">
-            <h4>Calangute & Candolim</h4>
-            <p>Ease into the trip with a lazy afternoon on Goa's most famous stretch of sand.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">3</div>
-          <div class="timeline-content">
-            <h4>Welcome Feast</h4>
-            <p>Fresh seafood and cold drinks at a beachfront shack to kick things off.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">4</div>
-          <div class="timeline-content">
-            <h4>First Night Out</h4>
-            <p>Scout the Baga/Calangute strip and set the tone for the weekend.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 2 -->
-      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-        <div class="day-badge">DAY 2 - Sat, Sep 6th</div>
-        <h3>Beaches, Markets & Party</h3>
-        
-        <div class="timeline-item">
-          <div class="timeline-icon">1</div>
-          <div class="timeline-content">
-            <h4>Morning at Baga Beach</h4>
-            <p>Water sports — jet skiing and parasailing — or just chill on the sand.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">2</div>
-          <div class="timeline-content">
-            <h4>Anjuna Flea Market</h4>
-            <p>Explore unique souvenirs, clothes, and local crafts amid Anjuna's bohemian vibe.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">3</div>
-          <div class="timeline-content">
-            <h4>Sunset at Vagator</h4>
-            <p>Soak in the iconic views from the cliffside shacks above the beach.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">4</div>
-          <div class="timeline-content">
-            <h4>Night in Anjuna / Vagator</h4>
-            <p>Dive into the vibrant nightlife famous for beach parties and trance music.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Transition Day (Day 3) -->
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom: 3rem;">
-      <div class="day-badge">DAY 3 - Sun, Sep 7th</div>
-      <h3>Forts, Transition & Serenity</h3>
-      
-      <div class="timeline-item">
-        <div class="timeline-icon">1</div>
-        <div class="timeline-content">
-          <h4>Chapora Fort (before checkout)</h4>
-          <p>Climb up for panoramic views of Vagator Beach and the coastline.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-icon">2</div>
-        <div class="timeline-content">
-          <h4>10:00 AM - Checkout & Drive South</h4>
-          <p>Leave North Goa and travel down to the calmer South, arriving around noon.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-icon">3</div>
-        <div class="timeline-content">
-          <h4>Afternoon at Palolem</h4>
-          <p>Check in and unwind on this peaceful crescent-shaped beach with calm waters.</p>
-        </div>
-      </div>
-      <div class="timeline-item">
-        <div class="timeline-icon">4</div>
-        <div class="timeline-content">
-          <h4>Seafood Dinner on Palolem</h4>
-          <p>Fresh catch at a beach shack, then a quiet drink and a stroll along the shore.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- North Goa Motion PORTRAIT VIDEO -->
-    <div class="motion-section">
-      <h3>North Goa in motion</h3>
-      <div class="video-wrapper">
-        <video autoplay muted loop playsinline>
-          <source src="Video 1.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-
-    <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.1); margin: 4rem 0;">
-
-    <!-- THE SOUTH HQ -->
-    <div class="section-header">
-      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">OUR SOUTH HQ</small>
-      <h2>South Goa Retreat</h2>
-      <p>Our peaceful secondary basecamp. Perfect for unwinding after the North Goa chaos.</p>
-    </div>
-
-    <!-- 3D Glass Card for South Airbnb -->
-    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="margin-bottom: 5rem;">
-      
-      <!-- Swipeable Photo Gallery (Updated to .jpg) -->
-      <div class="carousel-container">
-        <div class="carousel-track">
-          <img src="Villa 4.jpg" class="carousel-slide" alt="South Goa Villa - Photo 1">
-          <img src="Villa 5.jpg" class="carousel-slide" alt="South Goa Villa - Photo 2">
-          <img src="Villa 6.jpg" class="carousel-slide" alt="South Goa Villa - Photo 3">
-        </div>
-        <div class="carousel-hint">Swipe to see more ➔</div>
-      </div>
-      
-      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">👥 Crew Size</div>
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🛏️ Comfortable Rooms</div>
-        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🌴 Nature Vibes</div>
-      </div>
-
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
-        <div>
-          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">House Rules</h4>
-          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
-            <li><strong>Check-in:</strong> After 2:00 PM</li>
-            <li><strong>Checkout:</strong> Before 11:00 AM</li>
-            <li>Respect the quieter South Goa neighborhood.</li>
-            <li>No smoking inside the rooms.</li>
-            <li>No unregistered guests.</li>
-            <li>Keep the property clean.</li>
-          </ul>
-        </div>
-        <div>
-          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">Top Amenities</h4>
-          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
-            <li>High-speed WiFi</li>
-            <li>Air conditioning</li>
-            <li>Kitchen access</li>
-            <li>Relaxing outdoor spaces</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Subtle Airbnb Link -->
-      <div style="text-align: right; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.25rem;">
-        <a href="https://www.airbnb.co.uk/rooms/1671532681424276576?unique_share_id=f4d083b3-1722-4329-918f-4c02867295a9&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">
-          south airbnb ↗
-        </a>
-      </div>
-    </div>
-
-    <!-- South Goa Itinerary Header -->
-    <div class="section-header">
-      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 3 - 5</small>
-      <h2>South Goa</h2>
-      <p>Serene crescent bays, sweetwater lagoons, ancient forts, and pristine sunsets.</p>
-    </div>
-
-    <div class="itinerary-grid">
-      <!-- Day 4 -->
-      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-        <div class="day-badge">DAY 4 - Mon, Sep 8th</div>
-        <h3>Hidden Gems & Nature</h3>
-        
-        <div class="timeline-item">
-          <div class="timeline-icon">1</div>
-          <div class="timeline-content">
-            <h4>Cola (Khola) Beach</h4>
-            <p>Discover its unique sweetwater lagoon — perfect for a refreshing morning dip.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">2</div>
-          <div class="timeline-content">
-            <h4>Cabo de Rama Fort</h4>
-            <p>Explore ancient fort ruins with breathtaking views of the Arabian Sea.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">3</div>
-          <div class="timeline-content">
-            <h4>Sunset at Agonda Beach</h4>
-            <p>One of Goa's most pristine, quiet beaches for a serene golden-hour moment.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">4</div>
-          <div class="timeline-content">
-            <h4>Dinner in Agonda</h4>
-            <p>Wind down with a peaceful dinner at a local restaurant.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Day 5 -->
-      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
-        <div class="day-badge">DAY 5 - Tue, Sep 9th</div>
-        <h3>Last Moments & Departure</h3>
-        
-        <div class="timeline-item">
-          <div class="timeline-icon">1</div>
-          <div class="timeline-content">
-            <h4>Final Beach Breakfast</h4>
-            <p>One last breakfast by the sea, or revisit the crew's favorite spot.</p>
-          </div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-icon">2</div>
-          <div class="timeline-content">
-            <h4>Depart Goa</h4>
-            <p>Head out carrying unforgettable memories from an epic five days.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- South Goa Motion PORTRAIT VIDEO -->
-    <div class="motion-section">
-      <h3>South Goa in motion</h3>
-      <div class="video-wrapper">
-        <video autoplay muted loop playsinline>
-          <source src="Video 2.mp4" type="video/mp4">
-        </video>
-      </div>
-    </div>
-  </main>
-
-  <!-- Tips Section -->
-  <section class="tips-section">
-    <h2>Tips for the Crew</h2>
-    <p>A few things to keep the trip smooth, safe, and full of good vibes.</p>
-    
-    <div class="tips-grid">
-      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-        <h4>Transportation</h4>
-        <p>Rent scooters or bikes for easy navigation, especially in North Goa. Taxis are also available.</p>
-      </div>
-      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-        <h4>Stay Hydrated</h4>
-        <p>Goa gets hot and humid — drink plenty of water and tender coconut water.</p>
-      </div>
-      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-        <h4>Sun Protection</h4>
-        <p>Carry sunscreen, hats, and sunglasses for those long beach days.</p>
-      </div>
-      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-        <h4>Carry Cash</h4>
-        <p>Cards are widely accepted, but keep cash handy for shacks and small purchases.</p>
-      </div>
-      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-        <h4>Safety</h4>
-        <p>Keep an eye on your belongings, especially on crowded beaches and in markets.</p>
-      </div>
-      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
-        <h4>Embrace the Vibe</h4>
-        <p>Goa is all about relaxation and fun. Go with the flow and enjoy every moment.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <h3>Goa Boys' Trip - 2026</h3>
-    <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
-  </footer>
-
-  <!-- Floating Easter Egg Buttons -->
-  <div class="easter-btn" id="rouletteBtn">🎰</div>
-  <div class="easter-btn" id="beerBtn">🍺</div>
-
-  <!-- Fullscreen Video Overlay -->
-  <div class="video-modal" id="videoModal">
-    <div class="close-hint">Tap anywhere to close</div>
-    
-    <video id="beerVideo" loop playsinline>
-      <source src="Video 3.mov">
-    </video>
-    
-    <video id="rouletteVideo" loop playsinline>
-      <source src="Video 4.mov">
-    </video>
+<main class="container" id="itinerary">
+  
+  <div class="section-header">
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">OUR NORTH HQ</small>
+    <h2>The Plix Villa</h2>
+    <p>Our private 3BHK basecamp in Anjuna. Private pool, beach access, and space for the whole crew.</p>
   </div>
 
-  <!-- 3D Interactive Script Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
-
-  <!-- Interactive Script -->
-  <script>
-    const beerBtn = document.getElementById('beerBtn');
-    const rouletteBtn = document.getElementById('rouletteBtn');
-    const videoModal = document.getElementById('videoModal');
+  <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom:5rem;">
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <img src="Villa 1.jpg" class="carousel-slide" alt="HQ"><img src="Villa 2.jpg" class="carousel-slide" alt="HQ"><img src="Villa 3.jpg" class="carousel-slide" alt="HQ">
+      </div>
+      <div class="carousel-hint">Swipe to see more ➔</div>
+    </div>
     
-    const beerVideo = document.getElementById('beerVideo');
-    const rouletteVideo = document.getElementById('rouletteVideo');
-    let activeVideo = null;
+    <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
+      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">👥 11 Guests Max</div>
+      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🛏️ 3 King Bedrooms</div>
+      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🏊 Private Pool</div>
+    </div>
+    <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.1);padding-top:1.25rem;">
+      <a href="https://www.airbnb.com/rooms/1744839926958430462?unique_share_id=c61706c5-c1f4-462c-b86b-f720a81868b6&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">north airbnb ↗</a>
+    </div>
+  </div>
 
-    // Open Beer Video
-    beerBtn.addEventListener('click', () => {
-      activeVideo = beerVideo;
-      beerVideo.style.display = 'block';
-      rouletteVideo.style.display = 'none';
-      
-      videoModal.classList.add('active');
-      activeVideo.currentTime = 0; 
-      activeVideo.play();
-    });
+  <div class="section-header">
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">DAYS 1 - 2</small>
+    <h2>North Goa</h2>
+    <p>High-energy, buzzing beaches, bohemian markets, and legendary nightlife.</p>
+  </div>
 
-    // Open Roulette Video
-    rouletteBtn.addEventListener('click', () => {
-      activeVideo = rouletteVideo;
-      rouletteVideo.style.display = 'block';
-      beerVideo.style.display = 'none';
-      
-      videoModal.classList.add('active');
-      activeVideo.currentTime = 0; 
-      activeVideo.play();
-    });
+  <div class="itinerary-grid">
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
+      <div class="day-badge">DAY 1 - Sat, Sep 5th</div>
+      <h3>Arrival & First Sunset</h3>
+      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>13:20 PM - Touchdown at GOX</h4><p>SpiceJet SG 815 lands at Mopa. Grab rentals and hit the road to Anjuna.</p><div class="timeline-meta">🚗 28 km to HQ | 📍 <a href="https://maps.app.goo.gl/KDFsR" target="_blank">Mopa Airport</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>15:00 PM - Check-in & Chill</h4><p>Drop bags at Plix Villa, grab high-protein lunch, and crack open beers by the pool.</p><div class="timeline-meta">📍 <a href="https://maps.app.goo.gl/Anjuna" target="_blank">Anjuna</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>17:30 PM - Sunset at Vagator</h4><p>Iconic red cliffs, deep house music, and a legendary sunset view.</p><div class="timeline-meta">🚗 4 km from HQ | 🎥 <a href="https://www.youtube.com/results?search_query=vagator+beach+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>22:00 PM - The Opening Party</h4><p>Pre-game at the villa, then head to Tito's Lane or Hilltop to kick off the trip.</p></div></div>
+    </div>
 
-    // Close Modal on Background Click
-    videoModal.addEventListener('click', () => {
-      videoModal.classList.remove('active');
-      if (activeVideo) {
-        activeVideo.pause();
-      }
-    });
-  </script>
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
+      <div class="day-badge">DAY 2 - Sun, Sep 6th</div>
+      <h3>Hidden Gems & Epic Night</h3>
+      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>11:30 AM - Hangover Cure Brunch</h4><p>Late start. Head to Artjuna for espresso and massive paneer/egg breakfast.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>13:30 PM - Sweet Water Lake</h4><p>Drive up to Arambol for a stunning freshwater lake separated from the ocean.</p><div class="timeline-meta">🚗 18 km | 🎥 <a href="https://www.youtube.com/results?search_query=sweet+water+lake+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>17:00 PM - Chapora Fort</h4><p>Classic 'Dil Chahta Hai' fort. Great place for crew photos overlooking Vagator.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>22:00 PM - Club Cubana</h4><p>The "Nightclub in the Sky". Grab drinks and experience Goa's multi-level party.</p></div></div>
+    </div>
+  </div>
 
+  <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom:3rem;">
+    <div class="day-badge">DAY 3 - Mon, Sep 7th</div>
+    <h3>Culture, Transition & Lagoons</h3>
+    <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>10:30 AM - Checkout & Fontainhas</h4><p>Stop halfway in Panjim at Fontainhas for photos on the vibrant streets.</p></div></div>
+    <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>14:30 PM - Check-in South HQ</h4><p>Arrive at the South Goa Retreat. Claim beds and take a breather.</p></div></div>
+    <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>16:30 PM - Cola Beach Lagoon</h4><p>Navigate a bumpy dirt road to a secret crescent beach and emerald lagoon.</p><div class="timeline-meta">🚗 10 km from HQ | 🎥 <a href="https://www.youtube.com/results?search_query=cola+beach+goa+lagoon+shorts" target="_blank">Vibe Check</a></div></div></div>
+    <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>20:00 PM - Shack Dinner</h4><p>Grab fresh catch and heavy carbs at an Agonda shack to fuel up.</p></div></div>
+  </div>
+
+  <div class="motion-section">
+    <h3>North Goa in motion</h3>
+    <div class="video-wrapper"><video autoplay muted loop playsinline><source src="Video 1.mp4" type="video/mp4"></video></div>
+  </div>
+
+  <hr style="border:0;height:1px;background:rgba(0,0,0,0.1);margin:4rem 0;">
+
+  <div class="section-header">
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">OUR SOUTH HQ</small>
+    <h2>South Goa Retreat</h2>
+    <p>Our peaceful secondary basecamp. Perfect for unwinding after the North Goa chaos.</p>
+  </div>
+
+  <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom:5rem;">
+    <div class="carousel-container">
+      <div class="carousel-track">
+        <img src="Villa 4.jpg" class="carousel-slide" alt="South"><img src="Villa 5.jpg" class="carousel-slide" alt="South"><img src="Villa 6.jpg" class="carousel-slide" alt="South">
+      </div>
+      <div class="carousel-hint">Swipe to see more ➔</div>
+    </div>
+    
+    <div style="display:flex;gap:1rem;margin-bottom:2rem;flex-wrap:wrap;">
+      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">👥 Crew Size</div>
+      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🛏️ Comfortable Rooms</div>
+      <div class="badge" style="background:rgba(255,255,255,0.7);color:var(--accent-orange);border:none;padding:0.5rem 1rem;">🌴 Nature Vibes</div>
+    </div>
+    <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.1);padding-top:1.25rem;">
+      <a href="https://www.airbnb.co.uk/rooms/1671532681424276576?unique_share_id=f4d083b3-1722-4329-918f-4c02867295a9&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">south airbnb ↗</a>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1px;">DAYS 4 - 5</small>
+    <h2>South Goa</h2>
+    <p>Serene crescent bays, sweetwater lagoons, ancient forts, and pristine sunsets.</p>
+  </div>
+
+  <div class="itinerary-grid">
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
+      <div class="day-badge">DAY 4 - Tue, Sep 8th</div>
+      <h3>Forts, Serenity & Silent Parties</h3>
+      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>11:00 AM - Lazy Wake Up</h4><p>Make a quick Moka pot coffee at the Airbnb and prep for the day.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>13:00 PM - Cabo de Rama</h4><p>Ancient ruins with sweeping views. Hike down to the hidden Pebble Beach.</p><div class="timeline-meta">🎥 <a href="https://www.youtube.com/results?search_query=cabo+de+rama+pebble+beach+goa+shorts" target="_blank">Vibe Check</a></div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>16:30 PM - Palolem Beach Sunset</h4><p>Take a cheap boat ride out to Butterfly Beach or just grab beers on the sand.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>20:00 PM - Neptune Point Silent Party</h4><p>Grab a headset, choose your DJ channel, and rave on the beach to end the trip.</p></div></div>
+    </div>
+
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
+      <div class="day-badge">DAY 5 - Wed, Sep 9th</div>
+      <h3>Last Moments & Departure</h3>
+      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>10:00 AM - Final Breakfast</h4><p>One last solid meal by the sea before the travel begins.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>11:00 AM - Checkout HQ</h4><p>Pack up the bags and say goodbye to South Goa.</p></div></div>
+      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>12:00 PM - Drive to GOI</h4><p>Head North towards Dabolim Airport. Leave early to avoid stress.</p><div class="timeline-meta">🚗 60 km (~1.5 hrs)</div></div></div>
+      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>15:20 PM - Flight 6E 6264</h4><p>IndiGo flight takes off. Wheels down in New Delhi by 18:00.</p></div></div>
+    </div>
+  </div>
+
+  <div class="motion-section">
+    <h3>South Goa in motion</h3>
+    <div class="video-wrapper"><video autoplay muted loop playsinline><source src="Video 2.mp4" type="video/mp4"></video></div>
+  </div>
+</main>
+
+<section class="tips-section">
+  <h2>Rules for the Crew</h2>
+  <p>A few things to keep Pawan, Akram, Prayag, and Abhishek alive and thriving.</p>
+  <div class="tips-grid">
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="5"><h4>Transportation</h4><p>Rent scooters for the North to beat traffic. Use cabs for transition to South.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="5"><h4>Hydration Protocol</h4><p>Force everyone to drink tender coconut water every morning.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="5"><h4>Go with the Flow</h4><p>It's a boys' trip. If you sleep in, sleep in. Vibe over schedule.</p></div>
+  </div>
+</section>
+
+<footer>
+  <h3>Goa Boys' Trip - 2026</h3>
+  <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
+</footer>
+
+<div class="easter-btn" id="rouletteBtn">🎰</div>
+<div class="easter-btn" id="beerBtn">🍺</div>
+
+<div class="video-modal" id="videoModal">
+  <div class="close-hint">Tap anywhere to close</div>
+  <video id="beerVideo" loop playsinline><source src="Video 3.mov"></video>
+  <video id="rouletteVideo" loop playsinline><source src="Video 4.mov"></video>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+<script>
+  const beerBtn=document.getElementById('beerBtn'),rouletteBtn=document.getElementById('rouletteBtn');
+  const videoModal=document.getElementById('videoModal'),beerVideo=document.getElementById('beerVideo'),rouletteVideo=document.getElementById('rouletteVideo');
+  let activeVideo=null;
+
+  function openVideo(vid){
+    activeVideo=vid;
+    beerVideo.style.display=vid===beerVideo?'block':'none';
+    rouletteVideo.style.display=vid===rouletteVideo?'block':'none';
+    videoModal.classList.add('active');
+    activeVideo.currentTime=0;activeVideo.play();
+  }
+  
+  beerBtn.addEventListener('click',()=>openVideo(beerVideo));
+  rouletteBtn.addEventListener('click',()=>openVideo(rouletteVideo));
+  
+  videoModal.addEventListener('click',()=>{
+    videoModal.classList.remove('active');
+    if(activeVideo)activeVideo.pause();
+  });
+</script>
 </body>
 </html>
