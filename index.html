@@ -9,7 +9,7 @@
     :root {
       --text-dark: #2d2a26;
       --accent-orange: #f26d52;
-      --card-bg: rgba(255, 255, 255, 0.85);
+      --card-bg: rgba(255, 255, 255, 0.4);
       --font-serif: 'Playfair Display', serif;
       --font-sans: 'Inter', sans-serif;
     }
@@ -18,11 +18,43 @@
     
     body {
       font-family: var(--font-sans);
-      /* Minimal Goa Vibes: Distinct Sand, Sunset Coral, and Ocean Blue */
-      background: linear-gradient(135deg, #fdf8eb 0%, #fce1d5 50%, #e2f3f7 100%);
-      background-attachment: fixed;
+      background-color: #f4f0ea;
       color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* -------------------------------------
+       Surreal 3D Background Orbs
+    -------------------------------------- */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(60px);
+      z-index: -3;
+      animation: float 12s infinite ease-in-out alternate;
+    }
+    .orb-1 {
+      width: 400px; height: 400px;
+      background: linear-gradient(to bottom right, #f26d52, #ffb347);
+      top: -10%; left: -10%;
+    }
+    .orb-2 {
+      width: 500px; height: 500px;
+      background: linear-gradient(to bottom right, #00a8cc, #005c99);
+      bottom: -15%; right: -10%;
+      animation-delay: -5s;
+    }
+    .orb-3 {
+      width: 300px; height: 300px;
+      background: linear-gradient(to bottom right, #ff9a9e, #fecfef);
+      top: 40%; left: 50%;
+      transform: translateX(-50%);
+      animation-delay: -2s;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) scale(1) translateX(0); }
+      100% { transform: translateY(-80px) scale(1.1) translateX(40px); }
     }
 
     h1, h2, h3, h4 { font-family: var(--font-serif); }
@@ -49,17 +81,17 @@
     .hero-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.5);
       z-index: -1;
     }
 
-    .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; line-height: 1.1; }
-    .hero p { max-width: 600px; font-size: 1.2rem; margin-bottom: 2rem; }
+    .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; line-height: 1.1; transform: translateZ(50px); }
+    .hero p { max-width: 600px; font-size: 1.2rem; margin-bottom: 2rem; transform: translateZ(40px); }
     
-    .badges { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .badges { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; transform: translateZ(30px); }
     .badge {
       background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(10px);
       padding: 0.75rem 1.5rem;
       border-radius: 50px;
       font-weight: 600;
@@ -76,8 +108,22 @@
       font-weight: 600;
       transition: opacity 0.3s ease;
       align-self: flex-start;
+      transform: translateZ(40px);
     }
     .btn:hover { opacity: 0.9; }
+
+    /* 3D Glassmorphism Cards */
+    .tilt-card {
+      transform-style: preserve-3d;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.6);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+    }
+    /* Elements inside tilt-cards pop out in 3D */
+    .tilt-card > * {
+      transform: translateZ(30px);
+    }
 
     /* Highlights Section */
     .highlights {
@@ -88,6 +134,7 @@
       margin-top: -80px;
       position: relative;
       z-index: 2;
+      transform-style: preserve-3d;
     }
 
     .highlight-card {
@@ -99,21 +146,23 @@
       align-items: flex-end;
       padding: 1.5rem;
       color: white;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transform-style: preserve-3d;
     }
+    .highlight-card > div { transform: translateZ(40px); }
     
     .highlight-overlay {
       position: absolute;
       top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1));
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1));
       z-index: -1;
+      transform: translateZ(0); /* stays flat */
     }
 
     .highlight-card h3 { font-size: 1.5rem; margin-bottom: 0.25rem; }
     .highlight-card p { font-size: 0.9rem; opacity: 0.9; }
 
     /* Itinerary Container */
-    .container { padding: 4rem 10%; }
+    .container { padding: 4rem 10%; position: relative; z-index: 2; }
     .section-header { margin-bottom: 3rem; }
     .section-header h2 { font-size: 3rem; margin-bottom: 0.5rem; }
     .section-header p { color: #666; font-size: 1.1rem; }
@@ -126,17 +175,13 @@
     }
 
     .day-card {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
       border-radius: 20px;
       padding: 2.5rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-      border: 1px solid rgba(255,255,255,0.7);
     }
 
     .day-badge {
       display: inline-block;
-      background: #fcf0ea;
+      background: rgba(255,255,255,0.7);
       color: var(--accent-orange);
       padding: 0.4rem 1rem;
       border-radius: 20px;
@@ -153,7 +198,7 @@
       position: relative;
     }
     .timeline-icon {
-      background: #fdf5f3;
+      background: rgba(255,255,255,0.8);
       color: var(--accent-orange);
       width: 32px;
       height: 32px;
@@ -164,9 +209,43 @@
       margin-right: 1rem;
       flex-shrink: 0;
       font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
     .timeline-content h4 { font-family: var(--font-sans); font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem; }
-    .timeline-content p { font-size: 0.9rem; color: #666; }
+    .timeline-content p { font-size: 0.9rem; color: #555; }
+
+    /* Carousel Slideshow Styles */
+    .carousel-container {
+      width: 100%;
+      margin-bottom: 2rem;
+      transform: translateZ(40px);
+    }
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 15px;
+      padding-bottom: 10px;
+      scrollbar-width: none; 
+      -ms-overflow-style: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    .carousel-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
 
     /* Motion Portrait Video Sections */
     .motion-section { margin-bottom: 5rem; }
@@ -181,19 +260,21 @@
       max-width: 350px; 
       height: auto; 
       border-radius: 20px; 
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+      box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
       background: #000; 
     }
 
     /* Tips Section */
     .tips-section { 
-      background: rgba(255, 255, 255, 0.4); 
-      backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.2); 
+      backdrop-filter: blur(15px);
       padding: 4rem 10%; 
       text-align: center; 
+      position: relative;
+      z-index: 2;
     }
     .tips-section h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-    .tips-section > p { margin-bottom: 3rem; color: #666; }
+    .tips-section > p { margin-bottom: 3rem; color: #555; }
     
     .tips-grid {
       display: grid;
@@ -201,31 +282,44 @@
       gap: 1.5rem;
     }
     .tip-card {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.7);
       padding: 1.5rem;
       border-radius: 12px;
       text-align: left;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      border: 1px solid rgba(255,255,255,0.8);
     }
     .tip-card h4 { color: var(--accent-orange); font-family: var(--font-sans); margin-bottom: 0.5rem; }
-    .tip-card p { font-size: 0.9rem; color: #555; }
+    .tip-card p { font-size: 0.9rem; color: #444; }
 
     /* Footer */
     footer {
-      background: #2d2a26;
+      background: rgba(45, 42, 38, 0.95);
+      backdrop-filter: blur(10px);
       color: white;
       text-align: center;
       padding: 3rem 10%;
-      padding-bottom: 8rem; /* Extra padding so buttons don't overlap footer text */
+      padding-bottom: 8rem;
+      position: relative;
+      z-index: 2;
     }
     footer h3 { margin-bottom: 0.5rem; }
     footer p { color: #aaa; font-size: 0.9rem; }
     
+    /* Subtle Link Styles */
+    .subtle-link {
+      color: #666; 
+      text-decoration: none; 
+      font-size: 0.85rem; 
+      font-weight: 600; 
+      transition: color 0.2s ease;
+    }
+    .subtle-link:hover {
+      color: var(--accent-orange);
+    }
+
     /* -------------------------------------
        Easter Egg Floating Buttons
     -------------------------------------- */
-    
-    /* The keyframe for the subtle shake animation */
     @keyframes subtle-shake {
       0%, 85%, 100% { transform: rotate(0deg); }
       88% { transform: rotate(-10deg); }
@@ -254,27 +348,17 @@
     }
     
     .easter-btn:active {
-      transform: scale(0.90) !important; /* Forces it to shrink when tapped */
+      transform: scale(0.90) !important; 
       animation: none;
     }
 
-    #beerBtn {
-      bottom: 25px;
-      animation-delay: 0s; 
-    }
-
-    #rouletteBtn {
-      bottom: 100px;
-      animation-delay: 2s; 
-    }
+    #beerBtn { bottom: 25px; animation-delay: 0s; }
+    #rouletteBtn { bottom: 100px; animation-delay: 2s; }
     
     /* Easter Egg Video Modal */
     .video-modal {
       position: fixed;
-      top: 0; 
-      left: 0; 
-      width: 100vw; 
-      height: 100vh;
+      top: 0; left: 0; width: 100vw; height: 100vh;
       background: rgba(0, 0, 0, 0.9);
       z-index: 1000;
       display: flex;
@@ -293,7 +377,7 @@
       max-width: 400px;
       border-radius: 16px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-      display: none; /* Hidden by default until activated */
+      display: none; 
     }
     .close-hint {
       position: absolute;
@@ -319,6 +403,11 @@
 </head>
 <body>
 
+  <!-- Surreal Pure CSS Orbs -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
   <!-- Hero Section -->
   <header class="hero">
     <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
@@ -335,7 +424,7 @@
 
   <!-- Highlights -->
   <section class="highlights">
-    <div class="highlight-card">
+    <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
       <img src="baga.png" class="media-bg" alt="Baga Beach">
       <div class="highlight-overlay"></div>
       <div>
@@ -343,7 +432,7 @@
         <p>Baga, Anjuna, Vagator – intense energy and dancing all night.</p>
       </div>
     </div>
-    <div class="highlight-card">
+    <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
       <img src="palolem.JPG" class="media-bg" alt="Palolem Beach">
       <div class="highlight-overlay"></div>
       <div>
@@ -351,7 +440,7 @@
         <p>Palolem, Cola, Agonda – serene sands and quiet golden sunsets.</p>
       </div>
     </div>
-    <div class="highlight-card">
+    <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.3" data-tilt-scale="1.05">
       <img src="chapora.JPG" class="media-bg" alt="Chapora Fort">
       <div class="highlight-overlay"></div>
       <div>
@@ -361,8 +450,70 @@
     </div>
   </section>
 
-  <!-- North Goa Itinerary -->
+  <!-- Main Container -->
   <main class="container" id="itinerary">
+    
+    <!-- THE NORTH HQ -->
+    <div class="section-header">
+      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">OUR NORTH HQ</small>
+      <h2>The Plix Villa</h2>
+      <p>Our private 3BHK basecamp in Anjuna. Private pool, beach access, and space for the whole crew.</p>
+    </div>
+
+    <!-- 3D Glass Card -->
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="margin-bottom: 5rem;">
+      
+      <!-- Swipeable Photo Gallery -->
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <img src="Villa 1.JPG" class="carousel-slide" alt="The Plix Villa - Photo 1">
+          <img src="Villa 2.JPG" class="carousel-slide" alt="The Plix Villa - Photo 2">
+          <img src="Villa 3.JPG" class="carousel-slide" alt="The Plix Villa - Photo 3">
+        </div>
+        <div class="carousel-hint">Swipe to see more ➔</div>
+      </div>
+      
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">👥 11 Guests Max</div>
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🛏️ 3 King Bedrooms</div>
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🏊 Private Pool</div>
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🌴 Beach Access</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div>
+          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">Full House Rules</h4>
+          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
+            <li><strong>Check-in:</strong> After 1:00 PM</li>
+            <li><strong>Checkout:</strong> Before 10:00 AM</li>
+            <li>Maximum 11 guests allowed overnight.</li>
+            <li>No smoking inside the villa.</li>
+            <li>Quiet hours outside and by the pool after 10:00 PM.</li>
+            <li>No unregistered guests.</li>
+            <li>Wash own dishes before checking out.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">Top Amenities</h4>
+          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
+            <li>High-speed WiFi</li>
+            <li>Fully equipped kitchen</li>
+            <li>3 Bathrooms</li>
+            <li>Dedicated workspace</li>
+            <li>Air conditioning in all rooms</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Subtle Airbnb Link -->
+      <div style="text-align: right; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.25rem;">
+        <a href="https://www.airbnb.com/rooms/1744839926958430462?unique_share_id=c61706c5-c1f4-462c-b86b-f720a81868b6&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">
+          north airbnb ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- North Goa Itinerary Header -->
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 1 - 2</small>
       <h2>North Goa</h2>
@@ -371,7 +522,7 @@
 
     <div class="itinerary-grid">
       <!-- Day 1 -->
-      <div class="day-card">
+      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
         <div class="day-badge">DAY 1 - Fri, Sep 5th</div>
         <h3>Arrival & First Sunset</h3>
         
@@ -406,7 +557,7 @@
       </div>
 
       <!-- Day 2 -->
-      <div class="day-card">
+      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
         <div class="day-badge">DAY 2 - Sat, Sep 6th</div>
         <h3>Beaches, Markets & Party</h3>
         
@@ -442,7 +593,7 @@
     </div>
 
     <!-- Transition Day (Day 3) -->
-    <div class="day-card" style="margin-bottom: 3rem;">
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" style="margin-bottom: 3rem;">
       <div class="day-badge">DAY 3 - Sun, Sep 7th</div>
       <h3>Forts, Transition & Serenity</h3>
       
@@ -488,7 +639,64 @@
 
     <hr style="border: 0; height: 1px; background: rgba(0,0,0,0.1); margin: 4rem 0;">
 
-    <!-- South Goa Itinerary -->
+    <!-- THE SOUTH HQ -->
+    <div class="section-header">
+      <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">OUR SOUTH HQ</small>
+      <h2>South Goa Retreat</h2>
+      <p>Our peaceful secondary basecamp. Perfect for unwinding after the North Goa chaos.</p>
+    </div>
+
+    <!-- 3D Glass Card for South Airbnb -->
+    <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400" data-tilt-perspective="1000" style="margin-bottom: 5rem;">
+      
+      <!-- Swipeable Photo Gallery -->
+      <div class="carousel-container">
+        <div class="carousel-track">
+          <img src="Villa 4.JPG" class="carousel-slide" alt="South Goa Villa - Photo 1">
+          <img src="Villa 5.JPG" class="carousel-slide" alt="South Goa Villa - Photo 2">
+          <img src="Villa 6.JPG" class="carousel-slide" alt="South Goa Villa - Photo 3">
+        </div>
+        <div class="carousel-hint">Swipe to see more ➔</div>
+      </div>
+      
+      <div style="display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">👥 Crew Size</div>
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🛏️ Comfortable Rooms</div>
+        <div class="badge" style="background: rgba(255,255,255,0.7); color: var(--accent-orange); border: none; padding: 0.5rem 1rem;">🌴 Nature Vibes</div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div>
+          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">House Rules</h4>
+          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
+            <li><strong>Check-in:</strong> After 2:00 PM</li>
+            <li><strong>Checkout:</strong> Before 11:00 AM</li>
+            <li>Respect the quieter South Goa neighborhood.</li>
+            <li>No smoking inside the rooms.</li>
+            <li>No unregistered guests.</li>
+            <li>Keep the property clean.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom: 0.75rem; color: var(--text-dark);">Top Amenities</h4>
+          <ul style="margin-left: 1.2rem; color: #444; font-size: 0.95rem; line-height: 1.8;">
+            <li>High-speed WiFi</li>
+            <li>Air conditioning</li>
+            <li>Kitchen access</li>
+            <li>Relaxing outdoor spaces</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Subtle Airbnb Link -->
+      <div style="text-align: right; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 1.25rem;">
+        <a href="https://www.airbnb.co.uk/rooms/1671532681424276576?unique_share_id=f4d083b3-1722-4329-918f-4c02867295a9&viralityEntryPoint=1&s=76" target="_blank" class="subtle-link">
+          south airbnb ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- South Goa Itinerary Header -->
     <div class="section-header">
       <small style="color: var(--accent-orange); font-weight: bold; letter-spacing: 1px;">DAYS 3 - 5</small>
       <h2>South Goa</h2>
@@ -497,7 +705,7 @@
 
     <div class="itinerary-grid">
       <!-- Day 4 -->
-      <div class="day-card">
+      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
         <div class="day-badge">DAY 4 - Mon, Sep 8th</div>
         <h3>Hidden Gems & Nature</h3>
         
@@ -532,7 +740,7 @@
       </div>
 
       <!-- Day 5 -->
-      <div class="day-card">
+      <div class="day-card tilt-card" data-tilt data-tilt-max="3" data-tilt-speed="400">
         <div class="day-badge">DAY 5 - Tue, Sep 9th</div>
         <h3>Last Moments & Departure</h3>
         
@@ -570,27 +778,27 @@
     <p>A few things to keep the trip smooth, safe, and full of good vibes.</p>
     
     <div class="tips-grid">
-      <div class="tip-card">
+      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
         <h4>Transportation</h4>
         <p>Rent scooters or bikes for easy navigation, especially in North Goa. Taxis are also available.</p>
       </div>
-      <div class="tip-card">
+      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
         <h4>Stay Hydrated</h4>
         <p>Goa gets hot and humid — drink plenty of water and tender coconut water.</p>
       </div>
-      <div class="tip-card">
+      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
         <h4>Sun Protection</h4>
         <p>Carry sunscreen, hats, and sunglasses for those long beach days.</p>
       </div>
-      <div class="tip-card">
+      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
         <h4>Carry Cash</h4>
         <p>Cards are widely accepted, but keep cash handy for shacks and small purchases.</p>
       </div>
-      <div class="tip-card">
+      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
         <h4>Safety</h4>
         <p>Keep an eye on your belongings, especially on crowded beaches and in markets.</p>
       </div>
-      <div class="tip-card">
+      <div class="tip-card tilt-card" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.2">
         <h4>Embrace the Vibe</h4>
         <p>Goa is all about relaxation and fun. Go with the flow and enjoy every moment.</p>
       </div>
@@ -611,7 +819,6 @@
   <div class="video-modal" id="videoModal">
     <div class="close-hint">Tap anywhere to close</div>
     
-    <!-- Both videos are stored here, and only the clicked one is shown -->
     <video id="beerVideo" loop playsinline>
       <source src="Video 3.mov">
     </video>
@@ -620,6 +827,9 @@
       <source src="Video 4.mov">
     </video>
   </div>
+
+  <!-- 3D Interactive Script Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 
   <!-- Interactive Script -->
   <script>
@@ -638,7 +848,7 @@
       rouletteVideo.style.display = 'none';
       
       videoModal.classList.add('active');
-      activeVideo.currentTime = 0; // Restart
+      activeVideo.currentTime = 0; 
       activeVideo.play();
     });
 
@@ -649,7 +859,7 @@
       beerVideo.style.display = 'none';
       
       videoModal.classList.add('active');
-      activeVideo.currentTime = 0; // Restart
+      activeVideo.currentTime = 0; 
       activeVideo.play();
     });
 
