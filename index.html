@@ -40,10 +40,14 @@ h1,h2,h3,h4{font-family:var(--font-serif);}
 .day-card h3{font-size:1.8rem;margin-bottom:2.5rem;color:#1a1918;}
 .timeline-item{display:flex;margin-bottom:2.5rem;position:relative;}
 .timeline-icon{background:#fff;color:var(--accent-orange);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:1.2rem;flex-shrink:0;font-weight:bold;box-shadow:0 8px 15px rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.03);}
+.timeline-content{flex:1;}
 .timeline-content h4{font-family:var(--font-sans);font-size:1.05rem;font-weight:600;margin-bottom:0.4rem;color:#222;}
 .timeline-content p{font-size:0.95rem;color:#555;line-height:1.6;font-weight:300;}
-.loc-links a{display:inline-block;margin-top:8px;margin-right:10px;font-size:0.8rem;font-weight:600;text-decoration:none;background:rgba(255,255,255,0.6);padding:6px 12px;border-radius:8px;border:1px solid rgba(0,0,0,0.05);color:var(--accent-orange);transition:all 0.2s;}
-.loc-links a:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.05);}
+.timeline-meta{font-size:0.82rem;color:#666;margin-top:10px;background:rgba(255,255,255,0.7);padding:7px 12px;border-radius:8px;display:block;border:1px solid rgba(0,0,0,0.04);line-height:1.5;}
+.timeline-meta strong{color:#333;}
+.loc-links{margin-top:6px;}
+.loc-links a{display:inline-block;margin-top:4px;margin-right:8px;font-size:0.8rem;font-weight:600;text-decoration:none;background:rgba(255,255,255,0.85);padding:5px 11px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);color:var(--accent-orange);transition:all 0.2s;}
+.loc-links a:hover{background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.06);}
 .carousel-container{width:100%;margin-bottom:2.5rem;}
 .carousel-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:15px;padding-bottom:15px;scrollbar-width:none;}
 .carousel-track::-webkit-scrollbar{display:none;}
@@ -110,8 +114,9 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 
 <main class="container" id="itinerary">
   
+  <!-- NORTH BASECAMP -->
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our North HQ</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our North Basecamp</small>
     <h2>The Plix Villa</h2>
     <p>Our private 3BHK basecamp in Anjuna. Private pool, beach access, and space for the crew.</p>
   </div>
@@ -138,45 +143,155 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     </div>
   </div>
 
+  <!-- NORTH GOA DAYS -->
   <div class="section-header">
     <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Days 1 - 2</small>
-    <h2>North Goa</h2>
-    <p>High-energy, buzzing beaches, bohemian markets, and legendary nightlife.</p>
+    <h2>North Goa Itinerary</h2>
+    <p>High-energy beaches, scenic forts, culinary hotspots, and legendary nightlife.</p>
   </div>
 
   <div class="itinerary-grid">
+    <!-- Day 1 -->
     <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
       <div class="day-badge">Day 1 - Sat, Sep 5th</div>
       <h3>Arrival & First Sunset</h3>
-      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>1:20 PM - Touchdown at GOX</h4><p>SpiceJet SG 815 lands at Mopa Airport. Grab rentals and hit the road to Anjuna.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Manohar+International+Airport+Mopa+Goa" target="_blank">📍 Map (GOX)</a> <a href="https://www.youtube.com/results?search_query=Mopa+airport+goa+shorts" target="_blank">🎥 Video</a></div></div></div>
       
-      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>3:00 PM - Check-in & Chill</h4><p>Drop bags at Plix Villa, settle in, and crack open beers by the pool.</p></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">1</div>
+        <div class="timeline-content">
+          <h4>1:20 PM - Touchdown at GOX</h4>
+          <p>SpiceJet SG 815 lands at Manohar International Airport (Mopa). Grab rentals and drive to Anjuna.</p>
+          <div class="timeline-meta">
+            🚗 <strong>Distance to North HQ:</strong> ~28 km (45 mins) | ➡️ <strong>Next:</strong> Drive to Plix Villa
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Manohar+International+Airport+Mopa+Goa" target="_blank">📍 Map (GOX)</a>
+            <a href="https://www.youtube.com/results?search_query=Mopa+airport+goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>4:00 PM - Late Lunch</h4><p>Head to Burger Factory, Anjuna for insanely good gourmet burgers to fuel up.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Burger+Factory+Anjuna+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Burger+Factory+Anjuna+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">2</div>
+        <div class="timeline-content">
+          <h4>3:00 PM - Check-in & Settle In</h4>
+          <p>Drop bags at Plix Villa, claim rooms, and crack open the first drinks by the private pool.</p>
+          <div class="timeline-meta">
+            📍 <strong>North HQ Basecamp:</strong> 0 km | ➡️ <strong>To Next Spot:</strong> ~1.5 km to Burger Factory
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-icon">3</div>
+        <div class="timeline-content">
+          <h4>4:00 PM - Late Lunch at Burger Factory</h4>
+          <p>Famous for legendary craft burgers and quick gourmet bites to recharge after the flight.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~1.5 km (5 mins) | ➡️ <strong>To Next Spot:</strong> ~3.5 km to Vagator Beach
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Burger+Factory+Anjuna+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Burger+Factory+Anjuna+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
 
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>5:30 PM - Sunset at Vagator</h4><p>Visit Vagator Beach or Thalassa. Iconic red cliffs, deep house music, and a legendary sunset view.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Vagator+Beach+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=vagator+beach+goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">4</div>
+        <div class="timeline-content">
+          <h4>5:30 PM - Sunset at Vagator Beach</h4>
+          <p>Iconic red cliffs, cliffside shacks, deep house sets, and an epic Arabian Sea sunset.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~3.5 km (10 mins) | ➡️ <strong>To Next Spot:</strong> ~5.5 km to Tito's Lane
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Vagator+Beach+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=vagator+beach+goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">5</div><div class="timeline-content"><h4>10:00 PM - The Opening Party</h4><p>Pre-game at the villa, then head to Tito's Lane in Baga or Hilltop in Vagator to officially kick off the trip.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Titos+Lane+Baga+Goa" target="_blank">📍 Map (Tito's)</a> <a href="https://www.youtube.com/results?search_query=Titos+Lane+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">5</div>
+        <div class="timeline-content">
+          <h4>10:00 PM - Opening Night Party</h4>
+          <p>Pre-game at the villa, then head to Tito's Lane in Baga or Hilltop in Vagator to kick off the trip.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~5.5 km (15 mins) | ➡️ <strong>Return to HQ:</strong> ~5.5 km
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Titos+Lane+Baga+Goa" target="_blank">📍 Map (Tito's)</a>
+            <a href="https://www.youtube.com/results?search_query=Titos+Lane+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Day 2 -->
     <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
       <div class="day-badge">Day 2 - Sun, Sep 6th</div>
-      <h3>Hidden Gems & Epic Night</h3>
-      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>11:30 AM - Hangover Cure Brunch</h4><p>Late start. Head to Artjuna Cafe for coffee and a massive, fresh breakfast spread.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Artjuna+Cafe+Anjuna+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Artjuna+Cafe+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <h3>Hidden Gems & High-Energy Night</h3>
       
-      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>1:30 PM - Sweet Water Lake</h4><p>Drive up to Arambol. A short trek leads to a stunning freshwater lake separated from the roaring ocean by just a strip of sand.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Sweet+Water+Lake+Arambol+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=sweet+water+lake+goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">1</div>
+        <div class="timeline-content">
+          <h4>11:30 AM - Brunch at Artjuna Cafe</h4>
+          <p>Late start. Head to Artjuna for artisan coffee, Mediterranean plates, and hearty breakfast platters.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~1.8 km (5 mins) | ➡️ <strong>To Next Spot:</strong> ~17 km to Sweet Water Lake
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Artjuna+Cafe+Anjuna+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Artjuna+Cafe+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>5:00 PM - Chapora Fort</h4><p>Drive down to the classic 'Dil Chahta Hai' fort. Great place for group photos overlooking the Vagator coastline.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Chapora+Fort+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Chapora+Fort+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">2</div>
+        <div class="timeline-content">
+          <h4>1:30 PM - Sweet Water Lake (Arambol)</h4>
+          <p>Drive up to Arambol. A hidden freshwater lagoon nestled beside the sea under towering green hills.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~18 km (35 mins) | ➡️ <strong>To Next Spot:</strong> ~15 km to Chapora Fort
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Sweet+Water+Lake+Arambol+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=sweet+water+lake+goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>10:00 PM - Club Cubana</h4><p>The "Nightclub in the Sky" in Arpora. Grab drinks, hit the glowing pool, and experience Goa's most famous multi-level party.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Club+Cubana+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Club+Cubana+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">3</div>
+        <div class="timeline-content">
+          <h4>5:00 PM - Chapora Fort</h4>
+          <p>The iconic fort overlooking Vagator coastline. Perfect golden hour spot for panoramic views.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~3.8 km (10 mins) | ➡️ <strong>To Next Spot:</strong> ~6.5 km to Club Cubana
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Chapora+Fort+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Chapora+Fort+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="timeline-item">
+        <div class="timeline-icon">4</div>
+        <div class="timeline-content">
+          <h4>10:00 PM - Club Cubana</h4>
+          <p>The legendary "Nightclub in the Sky" on Arpora hill with multi-level dancefloors and a glowing pool.</p>
+          <div class="timeline-meta">
+            📍 <strong>From North HQ:</strong> ~4.5 km (12 mins) | ➡️ <strong>Return to HQ:</strong> ~4.5 km
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Club+Cubana+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Club+Cubana+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -186,27 +301,49 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
   </div>
 
   <hr style="border:0;height:1px;background:rgba(0,0,0,0.08);margin:5rem 0;">
-
+  <!-- TRANSITION & SOUTH GOA IN CHRONOLOGICAL ORDER -->
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">The Transition</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Day 3 - Transition Day</small>
     <h2>Heading South</h2>
-    <p>Leaving the chaos behind and entering the tranquil beauty of South Goa.</p>
+    <p>Leaving North Goa, stopping for Panjim culture, checking into South HQ, and exploring secret lagoons.</p>
   </div>
 
-  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:6rem;">
-    <div class="day-badge">Day 3 - Mon, Sep 7th</div>
-    <h3>Culture & Hidden Lagoons</h3>
+  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:4rem;">
+    <div class="day-badge">Day 3 - Morning & Afternoon</div>
+    <h3>Checkout & Latin Quarter Stop</h3>
     
-    <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>10:30 AM - Checkout North HQ</h4><p>Pack up the bags, do a final sweep, and load up the cabs for the drive down South.</p></div></div>
+    <div class="timeline-item">
+      <div class="timeline-icon">1</div>
+      <div class="timeline-content">
+        <h4>10:30 AM - Checkout North HQ</h4>
+        <p>Pack up Plix Villa, do a room check, and start the drive South towards Panjim.</p>
+        <div class="timeline-meta">
+          📍 <strong>From North HQ:</strong> 0 km | ➡️ <strong>To Next Spot:</strong> ~21 km to Fontainhas (40 mins)
+        </div>
+      </div>
+    </div>
     
-    <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>12:30 PM - Fontainhas & Lunch</h4><p>Stop halfway in Panjim at Fontainhas (India's only Latin Quarter) for aesthetic photos on the vibrant streets. Grab lunch at Bombay Coffee Roasters or Joseph Bar.</p>
-    <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Fontainhas+Panjim+Goa" target="_blank">📍 Map (Fontainhas)</a> <a href="https://www.youtube.com/results?search_query=Fontainhas+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+    <div class="timeline-item">
+      <div class="timeline-icon">2</div>
+      <div class="timeline-content">
+        <h4>12:30 PM - Fontainhas & Lunch in Panjim</h4>
+        <p>Walk through India's vibrant Portuguese quarter. Grab lunch and drinks at Joseph Bar or Bombay Coffee Roasters.</p>
+        <div class="timeline-meta">
+          📍 <strong>Distance from North HQ:</strong> ~21 km | ➡️ <strong>To South HQ:</strong> ~65 km (1 hr 45 mins)
+        </div>
+        <div class="loc-links">
+          <a href="https://www.google.com/maps/search/?api=1&query=Fontainhas+Panjim+Goa" target="_blank">📍 Map (Fontainhas)</a>
+          <a href="https://www.youtube.com/results?search_query=Fontainhas+Goa+shorts" target="_blank">🎥 Video</a>
+        </div>
+      </div>
+    </div>
   </div>
 
+  <!-- SOUTH BASECAMP (Placed right here in chronological order) -->
   <div class="section-header">
-    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our South HQ</small>
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our South Basecamp</small>
     <h2>South Goa Retreat</h2>
-    <p>Our peaceful secondary basecamp. Perfect for unwinding after the North Goa chaos.</p>
+    <p>Our tranquil secondary basecamp. Perfect for relaxing, lagoons, and quiet crescent bays.</p>
   </div>
 
   <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:6rem;">
@@ -233,51 +370,183 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     </div>
   </div>
 
+  <!-- SOUTH GOA DAYS -->
+  <div class="section-header">
+    <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Days 3 (Evening) to Day 5</small>
+    <h2>South Goa Itinerary</h2>
+    <p>Sweetwater lagoons, ancient coastal forts, silent raves, and seamless departure.</p>
+  </div>
+
   <div class="itinerary-grid">
+    <!-- Day 3 Evening -->
     <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
-      <div class="day-badge">Day 3 (Continued)</div>
-      <h3>Settling In</h3>
+      <div class="day-badge">Day 3 - Evening</div>
+      <h3>Check-in & Sweetwater Lagoon</h3>
       
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>3:30 PM - Check-in South HQ</h4><p>Arrive at the South Goa Retreat. Claim beds, drop bags, and take a breather in the quiet nature vibe.</p></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">3</div>
+        <div class="timeline-content">
+          <h4>3:30 PM - Check-in South HQ</h4>
+          <p>Arrive at the South Goa retreat. Claim rooms, unpack, and unwind in the calm nature surroundings.</p>
+          <div class="timeline-meta">
+            📍 <strong>South HQ Basecamp:</strong> 0 km | ➡️ <strong>To Next Spot:</strong> ~11 km to Cola Beach
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>5:00 PM - Cola Beach Lagoon</h4><p>Navigate a bumpy dirt road to find a secret crescent beach with an emerald sweetwater lagoon. Rent kayaks and paddle through the jungle.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Cola+Beach+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=cola+beach+goa+lagoon+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">4</div>
+        <div class="timeline-content">
+          <h4>5:00 PM - Cola Beach Lagoon</h4>
+          <p>Off-road track leading to an emerald sweetwater lagoon right next to the beach. Kayaking and sunset swim.</p>
+          <div class="timeline-meta">
+            📍 <strong>From South HQ:</strong> ~11 km (25 mins) | ➡️ <strong>To Next Spot:</strong> ~13 km to Dropadi (Palolem)
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Cola+Beach+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=cola+beach+goa+lagoon+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">5</div><div class="timeline-content"><h4>8:30 PM - Dinner at Dropadi</h4><p>Head to Dropadi at Palolem Beach. Famous for fresh seafood, heavy carbs, and a beautiful beachfront dining experience to fuel up after the transition day.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Dropadi+Restaurant+Palolem+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Dropadi+Palolem+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">5</div>
+        <div class="timeline-content">
+          <h4>8:30 PM - Beachfront Dinner at Dropadi</h4>
+          <p>Top-rated restaurant right on Palolem beach sands with incredible fresh food, curries, and drinks.</p>
+          <div class="timeline-meta">
+            📍 <strong>From South HQ:</strong> ~2.5 km (8 mins) | ➡️ <strong>Return to South HQ:</strong> ~2.5 km
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Dropadi+Restaurant+Palolem+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Dropadi+Palolem+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Day 4 -->
     <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
       <div class="day-badge">Day 4 - Tue, Sep 8th</div>
-      <h3>Forts, Serenity & Silent Parties</h3>
+      <h3>Coastal Forts & Silent Noise</h3>
       
-      <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>11:00 AM - Coffee & Breakfast</h4><p>Sleep in. Head to Zest Cafe in Agonda for phenomenal coffee, smoothie bowls, and a relaxing start to the day.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Zest+Cafe+Agonda+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Zest+Cafe+Agonda+Goa" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">1</div>
+        <div class="timeline-content">
+          <h4>11:00 AM - Breakfast at Zest Cafe</h4>
+          <p>Relaxed morning in Agonda. Zest is renowned for exceptional breakfast plates, iced brews, and smoothie bowls.</p>
+          <div class="timeline-meta">
+            📍 <strong>From South HQ:</strong> ~4 km (8 mins) | ➡️ <strong>To Next Spot:</strong> ~16 km to Cabo de Rama
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Zest+Cafe+Agonda+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Zest+Cafe+Agonda+Goa" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>1:00 PM - Cabo de Rama</h4><p>Explore ancient ruins with sweeping views of the Arabian Sea. Hike down to the hidden Pebble Beach for incredible, isolated scenery.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Cabo+de+Rama+Fort+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=cabo+de+rama+pebble+beach+goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">2</div>
+        <div class="timeline-content">
+          <h4>1:00 PM - Cabo de Rama Fort & Pebble Beach</h4>
+          <p>Explore ancient fortress ramparts overlooking the ocean. Hike down to the secluded Pebble Beach.</p>
+          <div class="timeline-meta">
+            📍 <strong>From South HQ:</strong> ~18 km (35 mins) | ➡️ <strong>To Next Spot:</strong> ~22 km to Palolem Beach
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Cabo+de+Rama+Fort+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=cabo+de+rama+pebble+beach+goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>4:30 PM - Palolem Beach Sunset</h4><p>Head to Palolem’s crescent bay. Take a cheap boat ride out to Butterfly Beach or just grab drinks on the sand.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Palolem+Beach+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Palolem+Beach+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">3</div>
+        <div class="timeline-content">
+          <h4>4:30 PM - Palolem Beach Sunset & Shacks</h4>
+          <p>Chill at Palolem crescent bay. Option for quick boat ride to Butterfly Beach or drinks on the sand.</p>
+          <div class="timeline-meta">
+            📍 <strong>From South HQ:</strong> ~2.5 km (8 mins) | ➡️ <strong>To Next Spot:</strong> ~1 km to Neptune Point
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Palolem+Beach+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Palolem+Beach+Goa+shorts" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
       
-      <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>8:00 PM - Neptune Point Silent Party</h4><p>Palolem is famous for headphone parties. Grab a headset, choose your DJ channel, and rave on the beach to end the trip in style.</p>
-      <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Neptune+Point+Palolem+Goa" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=Neptune+Point+Silent+Noise+Party+Goa" target="_blank">🎥 Video</a></div></div></div>
+      <div class="timeline-item">
+        <div class="timeline-icon">4</div>
+        <div class="timeline-content">
+          <h4>8:00 PM - Silent Noise Rave (Neptune Point)</h4>
+          <p>South Goa's famous wireless headphone rave overlooking the rocks. Multi-channel DJ party under the stars.</p>
+          <div class="timeline-meta">
+            📍 <strong>From South HQ:</strong> ~3 km (10 mins) | ➡️ <strong>Return to South HQ:</strong> ~3 km
+          </div>
+          <div class="loc-links">
+            <a href="https://www.google.com/maps/search/?api=1&query=Neptune+Point+Palolem+Goa" target="_blank">📍 Map</a>
+            <a href="https://www.youtube.com/results?search_query=Neptune+Point+Silent+Noise+Party+Goa" target="_blank">🎥 Video</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- Day 5 -->
   <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:4rem;">
     <div class="day-badge">Day 5 - Wed, Sep 9th</div>
-    <h3>Last Moments & Departure</h3>
+    <h3>Final Morning & Flight Home</h3>
     
-    <div class="timeline-item"><div class="timeline-icon">1</div><div class="timeline-content"><h4>10:00 AM - Final Breakfast</h4><p>Head over to The Space Goa for one last solid meal and coffee before the travel chaos begins.</p>
-    <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=The+Space+Goa+Palolem" target="_blank">📍 Map</a> <a href="https://www.youtube.com/results?search_query=The+Space+Goa+shorts" target="_blank">🎥 Video</a></div></div></div>
+    <div class="timeline-item">
+      <div class="timeline-icon">1</div>
+      <div class="timeline-content">
+        <h4>10:00 AM - Farewell Brunch at The Space Goa</h4>
+        <p>A tranquil garden cafe serving hearty brunch, juices, and wholesome plates before departure.</p>
+        <div class="timeline-meta">
+          📍 <strong>From South HQ:</strong> ~2 km (5 mins) | ➡️ <strong>To Next Spot:</strong> ~2 km back to South HQ
+        </div>
+        <div class="loc-links">
+          <a href="https://www.google.com/maps/search/?api=1&query=The+Space+Goa+Palolem" target="_blank">📍 Map</a>
+          <a href="https://www.youtube.com/results?search_query=The+Space+Goa+shorts" target="_blank">🎥 Video</a>
+        </div>
+      </div>
+    </div>
     
-    <div class="timeline-item"><div class="timeline-icon">2</div><div class="timeline-content"><h4>11:00 AM - Checkout HQ</h4><p>Pack up the bags and say goodbye to South Goa.</p></div></div>
+    <div class="timeline-item">
+      <div class="timeline-icon">2</div>
+      <div class="timeline-content">
+        <h4>11:00 AM - Checkout South HQ</h4>
+        <p>Pack up the bags, do a final sweep of the villa, and load the cab.</p>
+        <div class="timeline-meta">
+          📍 <strong>South HQ:</strong> 0 km | ➡️ <strong>To Next Spot:</strong> ~60 km to Dabolim Airport (GOI)
+        </div>
+      </div>
+    </div>
     
-    <div class="timeline-item"><div class="timeline-icon">3</div><div class="timeline-content"><h4>12:00 PM - Drive to GOI</h4><p>Head North towards Dabolim Airport. Leave early to avoid any stress.</p>
-    <div class="loc-links"><a href="https://www.google.com/maps/search/?api=1&query=Dabolim+Airport+Goa" target="_blank">📍 Map (GOI)</a></div></div></div>
+    <div class="timeline-item">
+      <div class="timeline-icon">3</div>
+      <div class="timeline-content">
+        <h4>12:00 PM - Drive to Dabolim Airport (GOI)</h4>
+        <p>Head North towards Dabolim Airport. Ample buffer time for highway traffic, bag check-in, and security.</p>
+        <div class="timeline-meta">
+          📍 <strong>Distance from South HQ:</strong> ~60 km (~1 hr 30 mins drive)
+        </div>
+        <div class="loc-links">
+          <a href="https://www.google.com/maps/search/?api=1&query=Dabolim+Airport+Goa" target="_blank">📍 Map (GOI)</a>
+        </div>
+      </div>
+    </div>
     
-    <div class="timeline-item"><div class="timeline-icon">4</div><div class="timeline-content"><h4>3:20 PM - Flight 6E 6264</h4><p>IndiGo flight takes off. Wheels down in New Delhi by 6:00 PM.</p></div></div>
+    <div class="timeline-item">
+      <div class="timeline-icon">4</div>
+      <div class="timeline-content">
+        <h4>3:20 PM - Flight 6E 6264 Departs</h4>
+        <p>IndiGo flight takes off from Dabolim (GOI). Non-stop flight lands in New Delhi (DEL) by 6:00 PM.</p>
+        <div class="timeline-meta">
+          ✈️ <strong>Flight Duration:</strong> 2h 40m | 🛬 <strong>Arrival DEL:</strong> 6:00 PM
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="motion-section">
@@ -288,10 +557,10 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 
 <section class="tips-section">
   <h2>Rules for the Crew</h2>
-  <p>A few things to keep everyone alive and thriving.</p>
+  <p>A few essentials to keep the entire group thriving.</p>
   <div class="tips-grid">
-    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Transportation</h4><p>Rent scooters for the North to beat traffic. Use cabs for the long transition to the South.</p></div>
-    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Hydration Protocol</h4><p>Goa is humid and the nights are long. Force everyone to drink tender coconut water every morning.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Transportation</h4><p>Rent scooters for the North to beat narrow street traffic. Use pre-booked cabs for the long transition to the South.</p></div>
+    <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Hydration Protocol</h4><p>Goa is hot and humid. Pick up tender coconut water and keep mineral water bottles handy on the scooters.</p></div>
     <div class="tip-card tilt-card" data-tilt data-tilt-max="3"><h4>Go with the Flow</h4><p>It's a vacation. If the crew sleeps in, you sleep in. If you want to sit at a shack all day, do it. Vibe over schedule.</p></div>
   </div>
 </section>
@@ -301,9 +570,11 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
   <p>Sun, sand, and unforgettable memories. Pack light, stay hydrated, and go with the flow.</p>
 </footer>
 
+<!-- Easter Egg Floating Buttons -->
 <div class="easter-btn" id="rouletteBtn">🎰</div>
 <div class="easter-btn" id="beerBtn">🍺</div>
 
+<!-- Fullscreen Video Overlay -->
 <div class="video-modal" id="videoModal">
   <div class="close-hint">Tap anywhere to close</div>
   <video id="beerVideo" loop playsinline><source src="Video 3.mov"></video>
