@@ -347,7 +347,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     </div>
   </div>
 
-  <!-- SOUTH BASECAMP (Placed right here in chronological order) -->
+  <!-- SOUTH BASECAMP -->
   <div class="section-header" id="south-section">
     <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our South Basecamp</small>
     <h2>South Goa Retreat</h2>
@@ -429,7 +429,9 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     <!-- Day 4 -->
     <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
       <div class="day-badge">Day 4 - Tue, Sep 8th</div>
+      
       <div class="weather-badge" id="weather-day4">⏳ Fetching weather...</div>
+      
       <h3>Coastal Forts & Silent Noise</h3>
       
       <div class="timeline-item">
@@ -506,7 +508,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
         <h4>10:00 AM - Farewell Brunch at The Space Goa</h4>
         <p>A tranquil garden cafe serving hearty brunch, juices, and wholesome plates before departure.</p>
         <div class="timeline-meta">
-          📍 <strong>From South HQ:</strong> ~2 km (5 mins) | ➡️ <strong>To Next Spot:</strong> ~2 km back to South HQ
+          📍 <strong>From South HQ:</strong> ~2 km (5 mins) | ➡️ <strong>Return to South HQ:</strong> ~2 km
         </div>
         <div class="loc-links">
           <a href="https://www.google.com/maps/search/?api=1&query=The+Space+Goa+Palolem" target="_blank">📍 Map</a>
@@ -593,7 +595,8 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     <div class="wd-stats">
       <div class="wd-stat-box"><span>High / Low</span><strong id="wdTemp">--°C</strong></div>
       <div class="wd-stat-box"><span>Rain Chance</span><strong id="wdRain">--%</strong></div>
-      <div class="wd-stat-box" style="grid-column: span 2;"><span>Wind Speed</span><strong id="wdWind">-- km/h</strong></div>
+      <div class="wd-stat-box"><span>Wind Speed</span><strong id="wdWind">-- km/h</strong></div>
+      <div class="wd-stat-box"><span>Rain Details</span><strong id="wdRainDetail" style="font-size:1.1rem;">--</strong></div>
     </div>
     <div class="wd-tip" id="wdTip">Fetching trip tip...</div>
   </div>
@@ -640,14 +643,14 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     'day5': { lat: 15.01, lon: 74.02, date: '2026-09-09', title: 'Day 5 - Departure Day' }
   };
 
-  function generateTripTip(rainProb, maxTemp, windSpeed, dayKey) {
-    if (rainProb > 50) return "🌧️ High chance of rain! Keep a poncho or raincoat in the scooter dicky before heading out.";
-    if (windSpeed > 20) return "💨 It's going to be breezy. Great for the beach, but careful riding the scooters on the coastal roads.";
+  function generateTripTip(rainProb, maxPrecip, maxTemp, windSpeed, dayKey) {
+    if (rainProb > 50 || maxPrecip > 0) return "🌧️ Keep a poncho or raincoat in the scooter dicky before heading out.";
+    if (windSpeed > 20) return "💨 It's going to be breezy. Careful riding the scooters on the coastal roads.";
     if (maxTemp > 31) {
         if(dayKey === 'day5') return "🔥 Hot day for travel. Make sure you blast the AC in the cab to the airport!";
-        return "☀️ Sun is blazing today. Don't be a hero—wear sunscreen and hydrate at the shacks.";
+        return "☀️ Sun is blazing today. Don't be a hero—wear sunscreen and hydrate.";
     }
-    return "🌴 Clear skies and perfect weather. Prime day for cruising on the scooters and hitting the beach!";
+    return "🌴 Clear skies and perfect weather. Prime day for cruising on the scooters!";
   }
 
   async function loadWeatherModal(dayKey) {
@@ -661,28 +664,56 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
       document.getElementById('wdTemp').innerText = "Loading...";
       document.getElementById('wdRain').innerText = "--%";
       document.getElementById('wdWind').innerText = "-- km/h";
-      document.getElementById('wdTip').innerText = "Fetching the latest atmospheric data...";
+      document.getElementById('wdRainDetail').innerText = "--";
+      document.getElementById('wdTip').innerText = "Analyzing atmospheric data...";
 
       wdModal.classList.add('active');
 
       try {
-          const url = `https://api.open-meteo.com/v1/forecast?latitude=${data.lat}&longitude=${data.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&start_date=${data.date}&end_date=${data.date}&timezone=auto`;
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${data.lat}&longitude=${data.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&hourly=precipitation&start_date=${data.date}&end_date=${data.date}&timezone=auto&forecast_days=16`;
           const res = await fetch(url);
           const json = await res.json();
 
-          if (json.daily) {
+          if (json.daily && json.daily.temperature_2m_max.length > 0) {
               const maxT = json.daily.temperature_2m_max[0];
               const minT = json.daily.temperature_2m_min[0];
-              const rain = json.daily.precipitation_probability_max[0];
+              const rainProb = json.daily.precipitation_probability_max[0];
               const wind = json.daily.wind_speed_10m_max[0];
 
+              // Hourly Rain Analysis
+              let maxPrecip = 0;
+              let peakHour = -1;
+              if (json.hourly && json.hourly.precipitation) {
+                  const precips = json.hourly.precipitation;
+                  for(let i=0; i<precips.length; i++) {
+                      if(precips[i] > maxPrecip) {
+                          maxPrecip = precips[i];
+                          peakHour = i;
+                      }
+                  }
+              }
+
+              let rainDesc = "Clear / No Rain";
+              if (maxPrecip > 0) {
+                  let timeStr = "";
+                  if (peakHour >= 0) {
+                      let ampm = peakHour >= 12 ? 'PM' : 'AM';
+                      let hr12 = peakHour % 12 || 12;
+                      timeStr = ` at ${hr12} ${ampm}`;
+                  }
+                  if (maxPrecip < 2) rainDesc = "Light Drizzle" + timeStr;
+                  else if (maxPrecip < 7) rainDesc = "Moderate Rain" + timeStr;
+                  else rainDesc = "Heavy Downpour" + timeStr;
+              }
+
               document.getElementById('wdTemp').innerText = `${maxT}°C / ${minT}°C`;
-              document.getElementById('wdRain').innerText = `${rain}%`;
+              document.getElementById('wdRain').innerText = `${rainProb}%`;
               document.getElementById('wdWind').innerText = `${wind} km/h`;
+              document.getElementById('wdRainDetail').innerText = rainDesc;
               
-              document.getElementById('wdTip').innerText = generateTripTip(rain, maxT, wind, dayKey);
+              document.getElementById('wdTip').innerText = generateTripTip(rainProb, maxPrecip, maxT, wind, dayKey);
           } else {
-             document.getElementById('wdTip').innerText = "Forecast too far out for detailed metrics.";
+             document.getElementById('wdTip').innerText = "Forecast too far out. Check back closer to the trip date!";
           }
       } catch (error) {
           document.getElementById('wdTip').innerText = "Could not fetch details. Check your connection.";
@@ -695,9 +726,8 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
       if(badge) {
           badge.addEventListener('click', () => loadWeatherModal(key));
           
-          // Initial background fetch to populate the button text
           const d = weatherDataMap[key];
-          const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&daily=temperature_2m_max&start_date=${d.date}&end_date=${d.date}&timezone=auto`;
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&daily=temperature_2m_max&start_date=${d.date}&end_date=${d.date}&timezone=auto&forecast_days=16`;
           fetch(url).then(r => r.json()).then(json => {
              if(json.daily && json.daily.temperature_2m_max[0]) {
                  badge.innerText = `⛅ Forecast: ${json.daily.temperature_2m_max[0]}°C (Tap for details)`;
@@ -707,7 +737,6 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           }).catch(() => { badge.innerText = `⛅ View weather details`; });
       }
   });
-
 </script>
 </body>
 </html>
