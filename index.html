@@ -38,7 +38,11 @@ h1,h2,h3,h4{font-family:var(--font-serif);}
 .itinerary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:2.5rem;margin-bottom:4rem;}
 .day-card{border-radius:24px;padding:3rem;scroll-margin-top:100px;}
 .day-badge{display:inline-block;background:rgba(217,108,78,0.1);color:var(--accent-orange);padding:0.4rem 1.2rem;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem;letter-spacing:0.5px;}
-.weather-badge{display:inline-block;background:rgba(0,0,0,0.04);color:#555;padding:0.4rem 1.2rem;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem;margin-left:0.5rem;border:1px solid rgba(0,0,0,0.05);}
+
+/* Interactive Weather Badge Styles */
+.weather-badge{display:inline-block;background:rgba(255,255,255,0.8);color:var(--accent-orange);padding:0.4rem 1.2rem;border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:1.5rem;margin-left:0.5rem;border:1px solid rgba(217,108,78,0.3);cursor:pointer;transition:transform 0.2s, box-shadow 0.2s;box-shadow:0 4px 10px rgba(0,0,0,0.03);}
+.weather-badge:hover{transform:translateY(-2px);box-shadow:0 6px 15px rgba(217,108,78,0.15);}
+
 .day-card h3{font-size:1.8rem;margin-bottom:2.5rem;color:#1a1918;}
 .timeline-item{display:flex;margin-bottom:2.5rem;position:relative;}
 .timeline-icon{background:#fff;color:var(--accent-orange);width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-right:1.2rem;flex-shrink:0;font-weight:bold;box-shadow:0 8px 15px rgba(0,0,0,0.05);border:1px solid rgba(0,0,0,0.03);}
@@ -77,6 +81,22 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 .easter-btn:active{transform:scale(0.92) !important;animation:none;}
 #beerBtn{bottom:30px;animation-delay:0s;}
 #rouletteBtn{bottom:110px;animation-delay:2.5s;}
+
+/* Detailed Weather Modal UI */
+.weather-details-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(26,25,24,0.85);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+.weather-details-modal.active{opacity:1;pointer-events:auto;}
+.wd-content{background:#F7F5F0;padding:2.5rem;border-radius:24px;width:90%;max-width:400px;position:relative;box-shadow:0 30px 60px rgba(0,0,0,0.3);transform:translateY(20px);transition:transform 0.3s ease;}
+.weather-details-modal.active .wd-content{transform:translateY(0);}
+.wd-close{position:absolute;top:20px;right:25px;font-size:1.8rem;cursor:pointer;color:#888;transition:color 0.2s;}
+.wd-close:hover{color:var(--accent-orange);}
+.wd-content h3{font-size:1.6rem;color:#1a1918;margin-bottom:0.2rem;}
+.wd-date{color:#666;font-size:0.9rem;font-weight:600;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:1px;}
+.wd-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;}
+.wd-stat-box{background:#fff;padding:1.2rem;border-radius:16px;text-align:center;border:1px solid rgba(0,0,0,0.04);box-shadow:0 4px 15px rgba(0,0,0,0.02);}
+.wd-stat-box span{display:block;font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px;}
+.wd-stat-box strong{font-size:1.4rem;color:var(--accent-orange);}
+.wd-tip{background:rgba(217,108,78,0.1);color:#d96c4e;padding:1.2rem;border-radius:16px;font-size:0.95rem;font-weight:600;text-align:center;line-height:1.5;}
+
 .video-modal{position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(26,25,24,0.95);backdrop-filter:blur(10px);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s ease;}
 .video-modal.active{opacity:1;pointer-events:auto;}
 .video-modal video{width:90%;max-width:380px;border-radius:20px;box-shadow:0 20px 60px rgba(0,0,0,0.4);display:none;}
@@ -89,7 +109,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 
 <header class="hero">
-  <img src="hero.jpg" class="media-bg" alt="Goa Beach Sunset">
+  <img src="hero.JPG" class="media-bg" alt="Goa Beach Sunset">
   <div class="hero-overlay"></div>
   <div class="badges">
     <a href="#day1" class="badge">Sep 5 - 9, 2026</a>
@@ -103,12 +123,10 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 </header>
 
 <section class="highlights">
-  <!-- Swapped palolem.JPG here so the party image shows up properly -->
   <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
     <img src="palolem.JPG" class="media-bg" alt="Party & Adventure"><div class="highlight-overlay"></div>
     <div><h3>Party & Adventure</h3><p>Tito's, Hilltop, Vagator – intense energy and dancing all night.</p></div>
   </div>
-  <!-- Swapped baga.png here so the beach image shows up properly -->
   <div class="highlight-card tilt-card" data-tilt data-tilt-glare data-tilt-max-glare="0.2" data-tilt-scale="1.03">
     <img src="baga.png" class="media-bg" alt="Calm & Hidden Gems"><div class="highlight-overlay"></div>
     <div><h3>Calm & Hidden Gems</h3><p>Sweet Water Lake, Cola, Agonda – secret sands and golden sunsets.</p></div>
@@ -290,11 +308,11 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
   </div>
 
   <hr style="border:0;height:1px;background:rgba(0,0,0,0.08);margin:5rem 0;">
-  <!-- TRANSITION TO SOUTH GOA (Chronological) -->
+  <!-- TRANSITION & SOUTH GOA IN CHRONOLOGICAL ORDER -->
   <div class="section-header">
     <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Day 3 - Transition Day</small>
     <h2>Heading South</h2>
-    <p>Leaving North Goa, soaking in Panjim's culture, and arriving at our tranquil South basecamp.</p>
+    <p>Leaving North Goa, stopping for Panjim culture, checking into South HQ, and exploring secret lagoons.</p>
   </div>
 
   <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:4rem;">
@@ -306,7 +324,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
       <div class="timeline-icon">1</div>
       <div class="timeline-content">
         <h4>10:30 AM - Checkout North HQ</h4>
-        <p>Pack up Plix Villa, do a room check, load up the cabs, and start the drive South.</p>
+        <p>Pack up Plix Villa, do a room check, and start the drive South towards Panjim.</p>
         <div class="timeline-meta">
           📍 <strong>From North HQ:</strong> 0 km | ➡️ <strong>To Next Spot (Fontainhas):</strong> ~21 km (40 mins)
         </div>
@@ -319,7 +337,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
         <h4>12:30 PM - Fontainhas & Lunch in Panjim</h4>
         <p>Walk through India's vibrant Portuguese quarter. Grab lunch and drinks at Joseph Bar or Bombay Coffee Roasters.</p>
         <div class="timeline-meta">
-          📍 <strong>From Previous Spot:</strong> ~21 km | 🏠 <strong>From North HQ:</strong> ~21 km | ➡️ <strong>To South HQ:</strong> ~65 km (1 hr 45 mins)
+          📍 <strong>Distance from North HQ:</strong> ~21 km | ➡️ <strong>To South HQ:</strong> ~65 km (1 hr 45 mins)
         </div>
         <div class="loc-links">
           <a href="https://www.google.com/maps/search/?api=1&query=Fontainhas+Panjim+Goa" target="_blank">📍 Map (Fontainhas)</a>
@@ -329,14 +347,14 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     </div>
   </div>
 
-  <!-- SOUTH BASECAMP (Placed here chronologically before check-in) -->
+  <!-- SOUTH BASECAMP (Placed right here in chronological order) -->
   <div class="section-header" id="south-section">
     <small style="color:var(--accent-orange);font-weight:bold;letter-spacing:1.5px;text-transform:uppercase;">Our South Basecamp</small>
     <h2>South Goa Retreat</h2>
-    <p>Our peaceful secondary basecamp in Palolem/Agonda. Perfect for relaxing, secret lagoons, and quiet crescent bays.</p>
+    <p>Our tranquil secondary basecamp. Perfect for relaxing, lagoons, and quiet crescent bays.</p>
   </div>
 
-  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:4rem;">
+  <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600" style="margin-bottom:6rem;">
     <div class="carousel-container">
       <div class="carousel-track">
         <img src="Villa 4.jpg" class="carousel-slide" alt="South"><img src="Villa 5.jpg" class="carousel-slide" alt="South"><img src="Villa 6.jpg" class="carousel-slide" alt="South">
@@ -345,14 +363,14 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     </div>
     
     <div style="display:flex;gap:1rem;margin-bottom:2.5rem;flex-wrap:wrap;">
-      <div class="badge" style="background:rgba(255,255,255,0.8);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;color:var(--text-dark);">👥 The Crew</div>
+      <div class="badge" style="background:rgba(255,255,255,0.8);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;color:var(--text-dark);">👥 For 7 People</div>
       <div class="badge" style="background:rgba(255,255,255,0.8);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;color:var(--text-dark);">🛏️ Comfortable Rooms</div>
       <div class="badge" style="background:rgba(255,255,255,0.8);border:1px solid rgba(0,0,0,0.05);padding:0.6rem 1.2rem;color:var(--text-dark);">🌴 Nature & Serenity</div>
     </div>
     
     <div class="loc-links">
       <a href="https://maps.app.goo.gl/gMS92vhwpdjizNqy9?g_st=ic" target="_blank">📍 View Area on Map</a>
-      <a href="https://www.youtube.com/results?search_query=south+goa+shorts" target="_blank">🎥 Vibe Check</a>
+      <a href="https://www.youtube.com/results?search_query=South+Goa+Airbnb+shorts" target="_blank">🎥 Vibe Check</a>
     </div>
 
     <div style="text-align:right;border-top:1px solid rgba(0,0,0,0.08);padding-top:1.5rem;margin-top:1.5rem;">
@@ -372,7 +390,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>3:30 PM - Check-in South HQ</h4>
           <p>Arrive at the South Goa retreat. Claim rooms, unpack, and unwind in the calm nature surroundings.</p>
           <div class="timeline-meta">
-            📍 <strong>South HQ Basecamp:</strong> 0 km | ➡️ <strong>To Next Spot (Cola):</strong> ~11 km
+            📍 <strong>South HQ Basecamp:</strong> 0 km | ➡️ <strong>To Next Spot:</strong> ~11 km to Cola Beach
           </div>
         </div>
       </div>
@@ -383,7 +401,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>5:00 PM - Cola Beach Lagoon</h4>
           <p>Off-road track leading to an emerald sweetwater lagoon right next to the beach. Kayaking and sunset swim.</p>
           <div class="timeline-meta">
-            📍 <strong>From Previous Spot:</strong> ~11 km | 🏠 <strong>From South HQ:</strong> ~11 km (25 mins) | ➡️ <strong>To Next Spot (Dropadi):</strong> ~13 km
+            📍 <strong>From South HQ:</strong> ~11 km (25 mins) | ➡️ <strong>To Next Spot:</strong> ~13 km to Dropadi (Palolem)
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Cola+Beach+Goa" target="_blank">📍 Map</a>
@@ -398,7 +416,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>8:30 PM - Beachfront Dinner at Dropadi</h4>
           <p>Top-rated restaurant right on Palolem beach sands with incredible fresh food, curries, and drinks.</p>
           <div class="timeline-meta">
-            📍 <strong>From Previous Spot:</strong> ~13 km | 🏠 <strong>From South HQ:</strong> ~2.5 km (8 mins) | ➡️ <strong>Return to South HQ:</strong> ~2.5 km
+            📍 <strong>From South HQ:</strong> ~2.5 km (8 mins) | ➡️ <strong>Return to South HQ:</strong> ~2.5 km
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Dropadi+Restaurant+Palolem+Goa" target="_blank">📍 Map</a>
@@ -411,10 +429,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     <!-- Day 4 -->
     <div class="day-card tilt-card" data-tilt data-tilt-max="2" data-tilt-speed="600">
       <div class="day-badge">Day 4 - Tue, Sep 8th</div>
-      
-      <!-- Weather Badge for South Goa -->
       <div class="weather-badge" id="weather-day4">⏳ Fetching weather...</div>
-      
       <h3>Coastal Forts & Silent Noise</h3>
       
       <div class="timeline-item">
@@ -423,11 +438,11 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>11:00 AM - Breakfast at Zest Cafe</h4>
           <p>Relaxed morning in Agonda. Zest is renowned for exceptional breakfast plates, iced brews, and smoothie bowls.</p>
           <div class="timeline-meta">
-            📍 <strong>From Previous Spot:</strong> 0 km (Start of Day) | 🏠 <strong>From South HQ:</strong> ~4 km (8 mins) | ➡️ <strong>To Next Spot (Cabo):</strong> ~16 km
+            📍 <strong>From South HQ:</strong> ~4 km (8 mins) | ➡️ <strong>To Next Spot:</strong> ~16 km to Cabo de Rama
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Zest+Cafe+Agonda+Goa" target="_blank">📍 Map</a>
-            <a href="https://www.youtube.com/results?search_query=Zest+Cafe+Agonda+Goa+shorts" target="_blank">🎥 Video</a>
+            <a href="https://www.youtube.com/results?search_query=Zest+Cafe+Agonda+Goa" target="_blank">🎥 Video</a>
           </div>
         </div>
       </div>
@@ -438,7 +453,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>1:00 PM - Cabo de Rama Fort & Pebble Beach</h4>
           <p>Explore ancient fortress ramparts overlooking the ocean. Hike down to the secluded Pebble Beach.</p>
           <div class="timeline-meta">
-            📍 <strong>From Previous Spot:</strong> ~16 km | 🏠 <strong>From South HQ:</strong> ~18 km (35 mins) | ➡️ <strong>To Next Spot (Palolem):</strong> ~22 km
+            📍 <strong>From South HQ:</strong> ~18 km (35 mins) | ➡️ <strong>To Next Spot:</strong> ~22 km to Palolem Beach
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Cabo+de+Rama+Fort+Goa" target="_blank">📍 Map</a>
@@ -453,7 +468,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>4:30 PM - Palolem Beach Sunset & Shacks</h4>
           <p>Chill at Palolem crescent bay. Option for quick boat ride to Butterfly Beach or drinks on the sand.</p>
           <div class="timeline-meta">
-            📍 <strong>From Previous Spot:</strong> ~22 km | 🏠 <strong>From South HQ:</strong> ~2.5 km (8 mins) | ➡️ <strong>To Next Spot (Neptune):</strong> ~1 km
+            📍 <strong>From South HQ:</strong> ~2.5 km (8 mins) | ➡️ <strong>To Next Spot:</strong> ~1 km to Neptune Point
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Palolem+Beach+Goa" target="_blank">📍 Map</a>
@@ -468,7 +483,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           <h4>8:00 PM - Silent Noise Rave (Neptune Point)</h4>
           <p>South Goa's famous wireless headphone rave overlooking the rocks. Multi-channel DJ party under the stars.</p>
           <div class="timeline-meta">
-            📍 <strong>From Previous Spot:</strong> ~1 km | 🏠 <strong>From South HQ:</strong> ~3 km (10 mins) | ➡️ <strong>Return to HQ:</strong> ~3 km
+            📍 <strong>From South HQ:</strong> ~3 km (10 mins) | ➡️ <strong>Return to South HQ:</strong> ~3 km
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Neptune+Point+Palolem+Goa" target="_blank">📍 Map</a>
@@ -491,7 +506,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
         <h4>10:00 AM - Farewell Brunch at The Space Goa</h4>
         <p>A tranquil garden cafe serving hearty brunch, juices, and wholesome plates before departure.</p>
         <div class="timeline-meta">
-          📍 <strong>From Previous Spot:</strong> 0 km (Start of Day) | 🏠 <strong>From South HQ:</strong> ~2 km (5 mins) | ➡️ <strong>Return to South HQ:</strong> ~2 km
+          📍 <strong>From South HQ:</strong> ~2 km (5 mins) | ➡️ <strong>To Next Spot:</strong> ~2 km back to South HQ
         </div>
         <div class="loc-links">
           <a href="https://www.google.com/maps/search/?api=1&query=The+Space+Goa+Palolem" target="_blank">📍 Map</a>
@@ -517,7 +532,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
         <h4>12:00 PM - Drive to Dabolim Airport (GOI)</h4>
         <p>Head North towards Dabolim Airport. Ample buffer time for highway traffic, bag check-in, and security.</p>
         <div class="timeline-meta">
-          📍 <strong>From Previous Spot:</strong> ~60 km | 🏠 <strong>From South HQ:</strong> ~60 km (~1 hr 30 mins drive)
+          📍 <strong>Distance from South HQ:</strong> ~60 km (~1 hr 30 mins drive)
         </div>
         <div class="loc-links">
           <a href="https://www.google.com/maps/search/?api=1&query=Dabolim+Airport+Goa" target="_blank">📍 Map (GOI)</a>
@@ -562,16 +577,31 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 <div class="easter-btn" id="rouletteBtn">🎰</div>
 <div class="easter-btn" id="beerBtn">🍺</div>
 
-<!-- Fullscreen Video Overlay -->
+<!-- Fullscreen Video Overlay for Easter Eggs -->
 <div class="video-modal" id="videoModal">
   <div class="close-hint">Tap anywhere to close</div>
   <video id="beerVideo" loop playsinline><source src="Video 3.mov"></video>
   <video id="rouletteVideo" loop playsinline><source src="Video 4.mov"></video>
 </div>
 
+<!-- Detailed Weather Modal UI -->
+<div class="weather-details-modal" id="weatherDetailsModal">
+  <div class="wd-content">
+    <div class="wd-close" id="wdClose">&times;</div>
+    <h3 id="wdTitle">Forecast</h3>
+    <div class="wd-date" id="wdDate">Date</div>
+    <div class="wd-stats">
+      <div class="wd-stat-box"><span>High / Low</span><strong id="wdTemp">--°C</strong></div>
+      <div class="wd-stat-box"><span>Rain Chance</span><strong id="wdRain">--%</strong></div>
+      <div class="wd-stat-box" style="grid-column: span 2;"><span>Wind Speed</span><strong id="wdWind">-- km/h</strong></div>
+    </div>
+    <div class="wd-tip" id="wdTip">Fetching trip tip...</div>
+  </div>
+</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
 <script>
-  // Video Modal Logic
+  // Easter Egg Video Logic
   const beerBtn=document.getElementById('beerBtn'),rouletteBtn=document.getElementById('rouletteBtn');
   const videoModal=document.getElementById('videoModal'),beerVideo=document.getElementById('beerVideo'),rouletteVideo=document.getElementById('rouletteVideo');
   let activeVideo=null;
@@ -592,51 +622,92 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     if(activeVideo)activeVideo.pause();
   });
 
-  // Weather Integration Logic for all 5 Days (Open-Meteo API)
-  async function fetchWeather(lat, lon, targetDateStr, elementId) {
-      const el = document.getElementById(elementId);
-      if(!el) return;
+  // Weather Modal Logic
+  const wdModal = document.getElementById('weatherDetailsModal');
+  const wdClose = document.getElementById('wdClose');
+  
+  wdClose.addEventListener('click', () => wdModal.classList.remove('active'));
+  wdModal.addEventListener('click', (e) => {
+    if(e.target === wdModal) wdModal.classList.remove('active');
+  });
+
+  // Weather API Data Configuration
+  const weatherDataMap = {
+    'day1': { lat: 15.58, lon: 73.74, date: '2026-09-05', title: 'Day 1 - North Goa' },
+    'day2': { lat: 15.58, lon: 73.74, date: '2026-09-06', title: 'Day 2 - North Goa' },
+    'day3': { lat: 15.01, lon: 74.02, date: '2026-09-07', title: 'Day 3 - Transition Day' },
+    'day4': { lat: 15.01, lon: 74.02, date: '2026-09-08', title: 'Day 4 - South Goa' },
+    'day5': { lat: 15.01, lon: 74.02, date: '2026-09-09', title: 'Day 5 - Departure Day' }
+  };
+
+  function generateTripTip(rainProb, maxTemp, windSpeed, dayKey) {
+    if (rainProb > 50) return "🌧️ High chance of rain! Keep a poncho or raincoat in the scooter dicky before heading out.";
+    if (windSpeed > 20) return "💨 It's going to be breezy. Great for the beach, but careful riding the scooters on the coastal roads.";
+    if (maxTemp > 31) {
+        if(dayKey === 'day5') return "🔥 Hot day for travel. Make sure you blast the AC in the cab to the airport!";
+        return "☀️ Sun is blazing today. Don't be a hero—wear sunscreen and hydrate at the shacks.";
+    }
+    return "🌴 Clear skies and perfect weather. Prime day for cruising on the scooters and hitting the beach!";
+  }
+
+  async function loadWeatherModal(dayKey) {
+      const data = weatherDataMap[dayKey];
+      if (!data) return;
+
+      document.getElementById('wdTitle').innerText = data.title;
+      const dateObj = new Date(data.date);
+      document.getElementById('wdDate').innerText = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+      
+      document.getElementById('wdTemp').innerText = "Loading...";
+      document.getElementById('wdRain').innerText = "--%";
+      document.getElementById('wdWind').innerText = "-- km/h";
+      document.getElementById('wdTip').innerText = "Fetching the latest atmospheric data...";
+
+      wdModal.classList.add('active');
+
       try {
-          const targetDate = new Date(targetDateStr);
-          const today = new Date();
-          const diffDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
-          
-          let url = '';
-          let isForecast = false;
-
-          if (diffDays <= 14 && diffDays >= 0) {
-              url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&daily=temperature_2m_max&start_date=${targetDateStr}&end_date=${targetDateStr}&timezone=auto`;
-              isForecast = true;
-          } else {
-              url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
-          }
-
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${data.lat}&longitude=${data.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&start_date=${data.date}&end_date=${data.date}&timezone=auto`;
           const res = await fetch(url);
-          const data = await res.json();
+          const json = await res.json();
 
-          if (isForecast && data.daily) {
-              const maxTemp = data.daily.temperature_2m_max[0];
-              el.innerText = `⛅ Forecast: ${maxTemp}°C`;
-          } else if (data.current_weather) {
-              const currTemp = data.current_weather.temperature;
-              el.innerText = `☀️ Current Weather: ${currTemp}°C`;
+          if (json.daily) {
+              const maxT = json.daily.temperature_2m_max[0];
+              const minT = json.daily.temperature_2m_min[0];
+              const rain = json.daily.precipitation_probability_max[0];
+              const wind = json.daily.wind_speed_10m_max[0];
+
+              document.getElementById('wdTemp').innerText = `${maxT}°C / ${minT}°C`;
+              document.getElementById('wdRain').innerText = `${rain}%`;
+              document.getElementById('wdWind').innerText = `${wind} km/h`;
+              
+              document.getElementById('wdTip').innerText = generateTripTip(rain, maxT, wind, dayKey);
           } else {
-              el.innerText = `⛅ Weather data unavailable`;
+             document.getElementById('wdTip').innerText = "Forecast too far out for detailed metrics.";
           }
       } catch (error) {
-          console.error("Weather API Error:", error);
-          el.innerText = `⛅ Live weather temporarily offline`;
+          document.getElementById('wdTip').innerText = "Could not fetch details. Check your connection.";
       }
   }
 
-  // Fetch for Days 1 & 2: North Goa (Anjuna coordinates)
-  fetchWeather(15.58, 73.74, '2026-09-05', 'weather-day1');
-  fetchWeather(15.58, 73.74, '2026-09-06', 'weather-day2');
-  
-  // Fetch for Days 3, 4, & 5: South Goa (Palolem/Agonda coordinates)
-  fetchWeather(15.01, 74.02, '2026-09-07', 'weather-day3');
-  fetchWeather(15.01, 74.02, '2026-09-08', 'weather-day4');
-  fetchWeather(15.01, 74.02, '2026-09-09', 'weather-day5');
+  // Bind click events to the badges and fetch initial simple badge text
+  Object.keys(weatherDataMap).forEach(key => {
+      const badge = document.getElementById(`weather-${key}`);
+      if(badge) {
+          badge.addEventListener('click', () => loadWeatherModal(key));
+          
+          // Initial background fetch to populate the button text
+          const d = weatherDataMap[key];
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&daily=temperature_2m_max&start_date=${d.date}&end_date=${d.date}&timezone=auto`;
+          fetch(url).then(r => r.json()).then(json => {
+             if(json.daily && json.daily.temperature_2m_max[0]) {
+                 badge.innerText = `⛅ Forecast: ${json.daily.temperature_2m_max[0]}°C (Tap for details)`;
+             } else {
+                 badge.innerText = `⛅ View weather details`;
+             }
+          }).catch(() => { badge.innerText = `⛅ View weather details`; });
+      }
+  });
+
 </script>
 </body>
 </html>
