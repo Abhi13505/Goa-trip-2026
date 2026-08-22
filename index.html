@@ -109,6 +109,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
 <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
 
 <header class="hero">
+  <!-- Corrected the hero image file name here -->
   <img src="hero.jpg" class="media-bg" alt="Goa Beach Sunset">
   <div class="hero-overlay"></div>
   <div class="badges">
@@ -444,7 +445,7 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           </div>
           <div class="loc-links">
             <a href="https://www.google.com/maps/search/?api=1&query=Zest+Cafe+Agonda+Goa" target="_blank">📍 Map</a>
-            <a href="https://www.youtube.com/results?search_query=Zest+Cafe+Agonda+Goa" target="_blank">🎥 Video</a>
+            <a href="https://www.youtube.com/results?search_query=Zest+Cafe+Agonda+Goa+shorts" target="_blank">🎥 Video</a>
           </div>
         </div>
       </div>
@@ -643,7 +644,8 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
     'day5': { lat: 15.01, lon: 74.02, date: '2026-09-09', title: 'Day 5 - Departure Day' }
   };
 
-  function generateTripTip(rainProb, maxPrecip, maxTemp, windSpeed, dayKey) {
+  function generateTripTip(rainProb, maxPrecip, maxTemp, windSpeed, dayKey, isFallback) {
+    if (isFallback) return "⏳ Detailed forecast for your trip date will unlock 14 days before you travel. Showing today's current weather as a preview!";
     if (rainProb > 50 || maxPrecip > 0) return "🌧️ Keep a poncho or raincoat in the scooter dicky before heading out.";
     if (windSpeed > 20) return "💨 It's going to be breezy. Careful riding the scooters on the coastal roads.";
     if (maxTemp > 31) {
@@ -658,8 +660,23 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
       if (!data) return;
 
       document.getElementById('wdTitle').innerText = data.title;
-      const dateObj = new Date(data.date);
-      document.getElementById('wdDate').innerText = dateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+      
+      const targetDate = new Date(data.date);
+      const today = new Date();
+      // Calculate diff in days
+      const diffDays = Math.ceil((targetDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+      
+      let fetchDate = data.date;
+      let isFallback = false;
+      
+      // If greater than 14 days, use today's date to fetch current detailed weather instead
+      if (diffDays > 14 || diffDays < 0) {
+          fetchDate = today.toISOString().split('T')[0];
+          isFallback = true;
+      }
+
+      const displayDateObj = new Date(fetchDate);
+      document.getElementById('wdDate').innerText = isFallback ? "CURRENT WEATHER PREVIEW" : displayDateObj.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
       
       document.getElementById('wdTemp').innerText = "Loading...";
       document.getElementById('wdRain').innerText = "--%";
@@ -670,14 +687,14 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
       wdModal.classList.add('active');
 
       try {
-          const url = `https://api.open-meteo.com/v1/forecast?latitude=${data.lat}&longitude=${data.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&hourly=precipitation&start_date=${data.date}&end_date=${data.date}&timezone=auto&forecast_days=16`;
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${data.lat}&longitude=${data.lon}&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,wind_speed_10m_max&hourly=precipitation&start_date=${fetchDate}&end_date=${fetchDate}&timezone=auto`;
           const res = await fetch(url);
           const json = await res.json();
 
           if (json.daily && json.daily.temperature_2m_max.length > 0) {
               const maxT = json.daily.temperature_2m_max[0];
               const minT = json.daily.temperature_2m_min[0];
-              const rainProb = json.daily.precipitation_probability_max[0];
+              const rainProb = json.daily.precipitation_probability_max[0] || 0;
               const wind = json.daily.wind_speed_10m_max[0];
 
               // Hourly Rain Analysis
@@ -711,9 +728,9 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
               document.getElementById('wdWind').innerText = `${wind} km/h`;
               document.getElementById('wdRainDetail').innerText = rainDesc;
               
-              document.getElementById('wdTip').innerText = generateTripTip(rainProb, maxPrecip, maxT, wind, dayKey);
+              document.getElementById('wdTip').innerText = generateTripTip(rainProb, maxPrecip, maxT, wind, dayKey, isFallback);
           } else {
-             document.getElementById('wdTip').innerText = "Forecast too far out. Check back closer to the trip date!";
+             document.getElementById('wdTip').innerText = "Data currently unavailable.";
           }
       } catch (error) {
           document.getElementById('wdTip').innerText = "Could not fetch details. Check your connection.";
@@ -727,10 +744,23 @@ footer p{color:#888;font-size:0.95rem;font-weight:300;}
           badge.addEventListener('click', () => loadWeatherModal(key));
           
           const d = weatherDataMap[key];
-          const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&daily=temperature_2m_max&start_date=${d.date}&end_date=${d.date}&timezone=auto&forecast_days=16`;
+          const targetDate = new Date(d.date);
+          const today = new Date();
+          const diffDays = Math.ceil((targetDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+          
+          let fetchDate = d.date;
+          let isFallback = false;
+          
+          if (diffDays > 14 || diffDays < 0) {
+              fetchDate = today.toISOString().split('T')[0];
+              isFallback = true;
+          }
+
+          const url = `https://api.open-meteo.com/v1/forecast?latitude=${d.lat}&longitude=${d.lon}&daily=temperature_2m_max&start_date=${fetchDate}&end_date=${fetchDate}&timezone=auto`;
           fetch(url).then(r => r.json()).then(json => {
              if(json.daily && json.daily.temperature_2m_max[0]) {
-                 badge.innerText = `⛅ Forecast: ${json.daily.temperature_2m_max[0]}°C (Tap for details)`;
+                 const prefix = isFallback ? "☀️ Current:" : "⛅ Forecast:";
+                 badge.innerText = `${prefix} ${json.daily.temperature_2m_max[0]}°C (Tap for details)`;
              } else {
                  badge.innerText = `⛅ View weather details`;
              }
